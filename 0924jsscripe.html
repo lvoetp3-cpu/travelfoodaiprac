@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS語法簡介</title>
+    <link rel="stylesheet" href="CSS/myall-css.css">
+<!-- CSS語法 -->
+</head>
+<body>
+    <!-- HTML語法 -->
+    <p class="mytitle01" id="demo01">javascript練習01</p>
+    <p class="mytitle02" id="demo02">javascript練習01</p>
+    <p class="mytitle03" id="demo03">javascript練習01</p>
+    <p class="mytitle03" id="demo04">javascript練習01</p>
+    <p class="mytitle01">我不知道我在幹嘛</p>
+    <p class="mytitle02">我真的不知道我在幹嘛</p>
+    
+    <div id="demo06">我腦袋嚴重爬帶</div>
+    <div id="demo07"></div>
+
+    <!-- 顯示每一家車子的品牌加上序號 -->
+     1 : Saab
+     2.Volvo
+
+     <h1 class="mytitle02">顯示每一家車子的品牌並加上序號(forEach)</h1>
+
+    <div id="demo08">
+        <P class="mytitle03">1:Saab</P>
+    </div>
+
+<!-- 
+    顯示每一個人的基本資料 , 編號1.姓名XX,年齡XX歲,居住在XX城市,職業為XXX -->
+
+    <div id="demo09">
+        <p class="mytitle03">編號1，姓名XX，年齡xx歲，居住在xx城市，職業為xx。</p>
+    </div>
+    
+    <script src="js/jquery-4.0.0.js"></script>
+    <script>
+//javascripe原生語法
+        document.getElementById("demo01").innerHTML="Hello Wrold!";
+        document.getElementById("demo02").innerHTML="這是一個大標題";
+        document.getElementById("demo03").innerHTML="這是一個小標題";
+        document.getElementById("demo04").innerHTML="這是一隻貓";
+    
+    // jquery語法 .-->class  #-->id
+        $("#demo03").html("這是一個下午時段03");
+        $("#demo04").html("這是一個下午時段04");
+        $("#demo05").html("這是一個下午時段05");
+        $("#demo06").html("我腦袋有點爬帶~");
+        
+
+        // i++ i=i+1
+        for(i=0;i<10;i++){
+            console.log("Hihellohi~")
+        }
+
+
+        for(i=2;i<10;i++){
+            for(j=1;j<10;j++){
+                console.log(i+"x"+j+"="+i*j);
+            }
+        }
+
+        for(i=0;i<11;i++){
+            $("#demo06").append('<p class="mytitle02">我的腦袋有點爬帶</p>');
+        }
+
+        for(i=0 ; i < 5; i++){
+            $("#demo06").append('<p class="mytitle03">這是一個hellp</p>');        
+        }
+
+        for(i = 0; i< 10; i++){
+            $("#demo07").append('<img src="images/venus-major-3czvr_EDCtg-unsplash.jpg" width="600px" alt="">');
+
+        }
+
+        // 陣列const
+        const cars = [
+    "Toyota", "BMW", "Mercedes-Benz", "Honda", "Ford", 
+    "Tesla", "Volkswagen", "Nissan", "Porsche", "Hyundai", 
+    "Audi", "Lexus", "Volvo", "Mazda", "Ferrari", 
+    "Lamborghini", "Subaru", "Chevrolet", "Kia", "BYD"];
+
+        // 利用for迴圈印出cars array的內容
+        for(i=0 ; i<3 ; i++){
+            console.log(cars[i]);
+        }
+
+
+
+for (i = 0;i < cars.length; i++){
+    console.log(cars[i]);
+}
+
+// 使用forEach讀取陣列
+cars.forEach(function(item){
+    console.log(item);    
+});
+
+cars.forEach(function(index,item){
+    console.log(index);
+    console.log(item);
+});
+
+// 顯示每一家車子的品牌並加上序號(forEach)
+
+cars.forEach(function(item,index){
+    $("#demo08").append('<P class="mytitle03">' + (index+1) + ':'+ item + '</P>');
+});
+
+// Json格式 array[object,object,object,object,]
+
+const persons = [
+    {
+        "name": "陳小明",
+        "age": 18,
+        "gender": "男",
+        "city": "彰化市",
+        "occupation": "高中生",
+        "isPremium": false,
+        "hobby": ["打傳說", "看動漫"]
+    },
+    {
+        "name": "林小花",
+        "age": 28,
+        "gender": "女",
+        "city": "嘉義市",
+        "occupation": "網頁設計師",
+        "isPremium": true,
+        "hobby": ["瑜珈", "網美咖啡廳", "貓咪"]
+    },
+    {
+        "name": "張老王",
+        "age": 72,
+        "gender": "男",
+        "city": "南投市",
+        "occupation": "退休茶農",
+        "isPremium": false,
+        "hobby": ["泡茶", "下象棋", "爬山"]
+    },
+    {
+        "name": "黃阿美",
+        "age": 35,
+        "gender": "女",
+        "city": "台中市",
+        "occupation": "行銷經理",
+        "isPremium": true,
+        "hobby": ["美妝", "追劇", "出國旅遊"]
+    },
+    {
+        "name": "李大華",
+        "age": 42,
+        "gender": "男",
+        "city": "高雄市",
+        "occupation": "外送員",
+        "isPremium": false,
+        "hobby": ["釣魚", "看棒球"]
+    },
+    {
+        "name": "蘇菲亞",
+        "age": 24,
+        "gender": "女",
+        "city": "台北市",
+        "occupation": "英文老師",
+        "isPremium": true,
+        "hobby": ["烘焙", "聽音樂", "攝影"]
+    },
+    {
+        "name": "趙鐵柱",
+        "age": 65,
+        "gender": "男",
+        "city": "新北市",
+        "occupation": "大樓管理員",
+        "isPremium": false,
+        "hobby": ["看報紙", "散步"]
+    },
+    {
+        "name": "錢多多",
+        "age": 55,
+        "gender": "男",
+        "city": "新竹市",
+        "occupation": "科技公司老闆",
+        "isPremium": true,
+        "hobby": ["打高爾夫", "品酒", "收集跑車"]
+    },
+    {
+        "name": "周星星",
+        "age": 21,
+        "gender": "男",
+        "city": "台南市",
+        "occupation": "大學生",
+        "isPremium": false,
+        "hobby": ["打籃球", "吃美食", "彈吉他"]
+    },
+    {
+        "name": "劉果凍",
+        "age": 8,
+        "gender": "女",
+        "city": "花蓮縣",
+        "occupation": "國小學生",
+        "isPremium": false,
+        "hobby": ["畫畫", "溜直排輪"]
+    }
+];
+
+// 印出整坨資料檢查
+console.log(persons);
+console.table(persons);
+
+
+persons.forEach(function(item , index){
+    console.log(item.hobby , item.age);
+});
+
+persons.forEach(function(index , item){
+    console.log(index , item.name , item.age , item.city , item.occupation);
+});
+
+persons.forEach(function(item, index){
+    $("#demo09").append('<p class="mytitle04">編號' + index +'，姓名' + item.name + '，年齡' + item.age + '歲，居住在' + item.city + '，職業為' + item.occupation + '。</p');
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>練習01. 使用CSS語法配置版面</title>
+    <style>
+        :root {
+            /* 青鳥色系（Bluebird Palette）語意變數 */
+            --runway-black: #0c1a24;            /* 深邃夜羽藍（原漆黑） */
+            --miranda-cream: #eef7f9;           /* 晨空淡青藍（原背景底色） */
+            --vogue-gold-trans: #1d4d62b9;      /* 湖水綠松石（原半透明導覽列） */
+            --couture-espresso: #133344c7;      /* 沉穩深海藍（原按鈕底色） */
+            --cerulean-blue: rgba(255, 183, 3, 0.9); /* 青鳥報喜金黃（原Hover文字） */
+            --editorial-white: #ffffff;         /* 純淨羽毛白（原純白內頁） */
+            --burgundy-red: #0077b6;            /* 幸福青鳥藍（原了解更多按鈕） */
+            --devil-crimson: #005f73;           /* 典雅深青綠（原頁尾底色） */
+            
+            /* 陰影與細節顏色 */
+            --shadow-soft: #0a1b2415;
+            --shadow-glow: #00b4d818;
+            --shadow-dark: #002830;
+            --text-light: aliceblue;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: var(--miranda-cream);
+        }
+        
+        .wrapper {
+            width: 1024px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .logo {
+            width: 1024px;
+            height: 320px;
+            background-color: var(--runway-black);
+            background-image: url(images/venus-major-3czvr_EDCtg-unsplash.jpg);
+            background-position: center center;
+            background-size: cover;
+        }
+        
+        .nav {
+            background-color: var(--vogue-gold-trans);
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        
+        .nav ul {
+            display: inline-block;
+        }
+        
+        .nav ul li {
+            float: left;
+            list-style-type: none;
+        }
+        
+        .nav ul li a {
+            text-decoration: none;
+            background-color: var(--couture-espresso);
+            color: var(--text-light);
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-right: 10px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 2px 2px var(--shadow-soft);
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        .nav ul li a:hover {
+            border-radius: 15px;
+            box-shadow: 2px 2px 2px 2px var(--shadow-glow);
+            color: var(--cerulean-blue);
+        }
+        
+        .content {
+            padding: 30px 30px 50px 50px;
+            background-color: var(--editorial-white);
+        }
+        
+        .content h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .content p {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        
+        .content a {
+            display: block;
+            background-color: var(--burgundy-red);
+            width: 120px;
+            height: 40px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            text-decoration: none;
+            color: var(--text-light);
+            text-align: center;
+            font-size: 18px;
+            line-height: 40px;
+            font-weight: bold;
+            box-shadow: 2px 2px 2px 2px var(--shadow-dark);
+            border-radius: 7px;
+        }
+        
+        .footer {
+            background-color: var(--devil-crimson);
+            color: var(--text-light);
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .mymytest{
+            font-size: 60px;
+        }
+        /* 響應式語法RWD */
+        @media screen and (max-width:1024px){
+            .wrapper{
+                width:95%;
+            }
+            .logo{
+                width: 100%;
+                height: 120px;
+                background-image: url(images/josephine-bevan-MtRfjqCLJaU-unsplash.jpg);
+
+            }
+
+            .nav ul{
+                display: block;
+            }
+
+            .nav ul li{
+                float: none;
+            }
+
+            .nav ul li a{
+                display: block;
+                margin-left: 0;
+                margin: top 2px;
+                margin-bottom: 2px;
+                padding-top: 10x;
+                padding-bottom: 5px;
+                border-radius:0;
+                box-shadow:none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="banner">
+            <div class="logo"></div>
+            <div class="nav">
+                <ul>
+                    <li><a href="#">首頁</a></li>
+                    <li><a href="#">最新消息</a></li>
+                    <li><a href="#">合作店家</a></li>
+                    <li><a href="#">關於我們</a></li>
+                    <li><a href="#">聯絡我們</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <h1>歡迎光臨</h1>
+            <p class="mymytest">第二一份第二章您是上午預覽出租發展供應設定，老大以及歐美說過工具去了認為，財務合適方向，離線榮譽馬。</p>
+            <p>成績是我運動商家預覽一些學者山西上升億元廣大投資中文，好激動知識信心它們每個加上國產卻是太陽豐富看起來配合，請您不說，內心找不到完成投訴三年主題審核，文化瀏覽引擎你想尊重交換攝影我想並沒有共享，昨天。</p>
+            <p>你自己本月戰爭但在不在有利於原文達到，公斤實施看到轉載主管第三透露不喜歡選擇召開漸漸女子，未經婦女，專題女孩天堂，關注。</p>
+            <a href="#">了解更多</a>
+        </div>
+        <div class="footer">
+            PowerBy 26.2026.9.23
+        </div>
+    </div>
+</body>
+</html>
