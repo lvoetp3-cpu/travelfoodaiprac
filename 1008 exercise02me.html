@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap切版exercise02</title>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/myall-css.css">
+    <style>
+        :root {
+            /* 青鳥色系（Bluebird Palette）語意變數 */
+            --runway-black: #0c1a24;            /* 深邃夜羽藍（原漆黑） */
+            --miranda-cream: #eef7f9;           /* 晨空淡青藍（原背景底色） */
+            --vogue-gold-trans: #1d4d62b9;      /* 湖水綠松石（原半透明導覽列） */
+            --couture-espresso: #133344c7;      /* 沉穩深海藍（原按鈕底色） */
+            --cerulean-blue: rgba(255, 183, 3, 0.9); /* 青鳥報喜金黃（原Hover文字） */
+            --editorial-white: #ffffff;         /* 純淨羽毛白（原純白內頁） */
+            --burgundy-red: #0077b6;            /* 幸福青鳥藍（原了解更多按鈕） */
+            --devil-crimson: #005f73;           /* 典雅深青綠（原頁尾底色） */
+            
+            /* 陰影與細節顏色 */
+            --shadow-soft: #0a1b2415;
+            --shadow-glow: #00b4d818;
+            --shadow-dark: #002830;
+            --text-light: aliceblue;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: var(--miranda-cream);
+        }
+        
+        .box01 {
+            height: 120px;
+            margin-top: 15px;
+        }
+        
+        .logo {
+            width: 1024px;
+            height: 320px;
+            background-color: var(--runway-black);
+            background-image: url(images/Gemini_Generated_Image_1fif261fif261fif.png);
+            background-position: center center;
+            background-size: cover;
+        }
+        
+        
+        
+        .content {
+            padding: 30px 30px 50px 50px;
+            background-color: var(--editorial-white);
+        }
+        
+        .content h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .content p {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        
+        .content a {
+            display: block;
+            background-color: var(--burgundy-red);
+            width: 120px;
+            height: 40px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            text-decoration: none;
+            color: var(--text-light);
+            text-align: center;
+            font-size: 18px;
+            line-height: 40px;
+            font-weight: bold;
+            box-shadow: 2px 2px 2px 2px var(--shadow-dark);
+            border-radius: 7px;
+        }
+        
+        .footer {
+            background-color: var(--devil-crimson);
+            color: var(--text-light);
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .mymytest{
+            font-size: 60px;
+        }
+
+          .box01{
+            height: 160px;
+            background-image: url(images/landspace01.avif);
+        }
+        .box02 {
+            height: 46px;                 /* 💡 手機版大幅縮小高度，輕巧精緻 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            color: var(--runway-black);   /* 深邃羽藍字體 */
+            background-color: #f8f9fa;    /* 質感極淺灰 */
+            
+            border: 1px solid rgba(12, 26, 36, 0.1); 
+            border-radius: 6px;           /* 6px 黃金微圓角 */
+            
+            font-size: 15px;              /* 💡 縮小字體，更顯精緻 */
+            font-weight: 700;             
+            letter-spacing: 2px;          /* 維持時裝雜誌感的呼吸字距 */
+            cursor: pointer;
+            
+            /* 流暢動態曲線 */
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            margin-bottom: 20px;
+        }
+
+        /* 懸浮特效：溫和反轉與輕微上浮 */
+        .box02:hover {
+            color: var(--editorial-white);      
+            background-color: var(--runway-black); 
+            border-color: var(--runway-black);
+            box-shadow: 0 8px 16px rgba(12, 26, 36, 0.08); /* 縮小陰影範圍，更為低調 */
+            transform: translateY(-3px);        /* 輕微上浮 */
+        }
+        .box03{
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px 2px #8b8b8b;
+        }
+
+        /* 當螢幕寬度大於 992px（平板與小桌機）時 */
+        @media screen and (min-width: 992px) {
+            .box02 {
+                height: 52px;            /* 💡 電腦版同步縮小，寬高比極度俐落 */
+                max-width: 160px;        /* 💡 限制最大寬度，避免電腦版長條過粗 */
+                font-size: 16px;
+                margin: 0 auto;          /* 配合 Bootstrap 置中 */
+                margin-bottom: 20px;
+            }
+        }
+
+        /* 當螢幕寬度大於 1200px（大型桌上型電腦）時 */
+        @media screen and (min-width: 1200px) {
+            .box02 {
+                height: 56px;            /* 💡 大螢幕下依舊維持細緻小巧的比例 */
+                max-width: 180px;        
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>    
+<body>
+    <div class="wrapper">
+        <div class="banner">
+            <div class="logo"></div>
+            
+        </div>
+        <div class="content">
+            <div class="container">
+        
+        <div class="row">
+            <div class="col-sm-6 col-md-3 mt-3">
+                <div class="box02 bg-light h1 text-center fw-900">
+                    選單01
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mt-3">
+                <div class="box02 bg-light h1 text-center fw-900">
+                    選單02
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mt-3">
+                <div class="box02 bg-light h1 text-center fw-900">
+                    選單03
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mt-3">
+                <div class="box02 bg-light h1 text-center fw-900">
+                    選單04
+                </div>
+            </div>
+            <div class="row" id="product">
+            <div class="col-md-6 col-lg-4 mt-3">
+                <div class="box03">
+                    <img src="images/landspace02.avif" class="img-fluid" alt="">
+                    <div class="h4 fw-900 text-center mt-3">店名</div>
+                    <div class="h3">地址: XXXX</div>
+                    <div class="h3">簡介: XXXX</div>
+                </div>
+            </div>
+        </div>     
+            
+            
+                
+                
+                
+
+
+            </div> -->
+        </div>
+        <div class="footer">TCTC COPYRIGHT 2026</div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-4.0.0.js"></script>
+<script>
+    $(function(){
+        // 介接資料
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/products",
+            dataType: "json",
+            success: showdata,
+            error: function(){
+                console.log("介接失敗，請檢查 API 是否開啟或有 CORS 問題");
+                alert("介接失敗");
+            }
+        });
+    });
+
+    function showdata(data){
+        console.log("成功取得資料：", data);
+        
+        // 清空原本寫死在 HTML 裡的第一筆測試資料（避免重複呈現）
+        $("#product").empty();
+
+        // 修正：因為 data 本身就是陣列，直接對 data 進行迴圈即可
+        data.forEach(function(item) {
+            const strHTML = '<div class="col-md-6 col-lg-4 mt-3">' +
+                '<div class="box03">' +
+                    '<img src="images/landspace02.avif" class="img-fluid" alt="">' +
+                    '<div class="h4 fw-900 text-center mt-3">' + item.Name + '</div>' +
+                    '<div class="h3">' + item.City + item.Town + item.Address + '</div>' +
+                    '<div class="h3">' + item.HostWords + '</div>' +
+                '</div>' +
+            '</div>';
+            
+            $("#product").append(strHTML);
+        });
+    }
+</script>
+
+
+</body>
+</html>

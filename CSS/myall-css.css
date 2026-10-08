@@ -1,0 +1,85 @@
+/* ⚠️ 必須放在最上面！告訴瀏覽器去載入思源黑體 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
+:root {
+    /* 青鳥色系（Bluebird Palette）語意變數 */
+    --runway-black: #0c1a24;            /* 深邃夜羽藍（原漆黑） */
+    --miranda-cream: #eef7f9;           /* 晨空淡青藍（原背景底色） */
+    --vogue-gold-trans: #1d4d62b9;      /* 湖水綠松石（原半透明導覽列） */
+    --couture-espresso: #133344c7;      /* 沉穩深海藍（原按鈕底色） */
+    --cerulean-blue: rgba(255, 183, 3, 0.9); /* 青鳥報喜金黃（原Hover文字） */
+    --editorial-white: #ffffff;         /* 純淨羽毛白（原純白內頁） */
+    --burgundy-red: #0077b6;            /* 幸福青鳥藍（原了解更多按鈕） */
+    --devil-crimson: #005f73;           /* 典雅深青綠（原頁尾底色） */
+    
+    /* 陰影與細節顏色 */
+    --shadow-soft: #0a1b2415;
+    --shadow-glow: #00b4d818;
+    --shadow-dark: #002830;
+    --text-light: aliceblue;
+}
+body{
+    font-family: "Zen Maru Gothic", sans-serif;
+}
+
+.zm-300{
+    font-weight: 300;
+}
+
+.zm-400{
+    font-weight: 400;
+}
+
+.zm-500{
+    font-weight: 500;
+}
+
+.zm-700{
+    font-weight: 700;
+}
+
+.zm-900{
+    font-weight: 900;
+}
+/* 標題 */
+.mytitle01{
+    font-size: 120px;
+    font-weight: 500;
+    text-align: center;
+    color: #9c0884;
+}
+
+.mytitle02{
+    font-size: 100px;
+    font-weight: 700;
+    text-align: center;
+    color: #005f73;
+}
+
+.mytitle03{
+    font-size: 80px;
+    font-weight: 900;
+    text-align: center;
+    color: #2b8012;
+}
+
+.mytitle04{
+    font-size: 30px;
+    font-weight: 900;
+    text-align: center;
+    color: #2b8012;
+}
+
+
+.mytitle05{
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+    color: #2b8012;
+}
+
+
+/* 背景圖 */
+.bg-img{
+    background-position: center center;
+    background-size: cover;
+}
