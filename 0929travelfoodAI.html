@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地方美食資料練習</title>
+    <link rel="stylesheet" href="CSS/myall-css.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+    /* 魔戒中土世界風格色調 */
+    --bg-main: #121410;          /* 莫多與幽暗密林深處的暗黑底色 */
+    --bg-wrapper: #1c1f18;       /* 矮人地底大廳的深石色容器背景 */
+    --bg-card: #252920;          /* 卡片背景 */
+    --gold-primary: #d4af37;     /* 至尊魔戒的純金光芒 */
+    --gold-glow: #ffdf7a;        /* 銘文發光的金色 */
+    --text-light: #f4edd2;       /* 復古羊皮紙的米白字體 */
+    --text-muted: #a39e8d;       /* 灰色斗篷般的次要文字 */
+    --border-color: #3d3522;     /* 古老符文的雕刻邊框色 */
+    
+    /* 字體與陰影 */
+    --font-fantasy: 'Cinzel', 'Georgia', 'Times New Roman', serif;
+    --box-shadow-magic: 0 0 15px rgba(212, 175, 55, 0.15);
+    --box-shadow-hover: 0 0 25px rgba(255, 223, 122, 0.4);
+}
+
+/* 全域復古奇幻風格設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    font-family: var(--font-fantasy);
+    background-image: radial-gradient(circle, rgba(28,31,24,0.3) 0%, rgba(18,20,16,1) 100%);
+    padding: 20px;
+     /* 請替換為你下載的亮色羊皮紙地圖 URL */
+  background-image: url('your-bright-parchment-map.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* 視差滾動效果 */
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* 大標題：中土世界史詩感 */
+.mytitle02 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--gold-primary);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 2px 2px 4px #000;
+    letter-spacing: 4px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* 主容器：如古老卷軸與城堡大廳般沉穩 */
+.wrapper {
+    width: 1024px;
+    margin: 30px auto;
+    background-color: var(--bg-wrapper);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-magic), inset 0 0 20px rgba(0,0,0,0.6);
+    padding: 25px;
+    overflow: hidden;
+}
+
+/* 餐廳卡片：羊皮紙與精靈工藝質感 */
+.demo {
+    width: 32%;
+    margin-top: 20px;
+    margin-right: 1.33%;
+    float: left;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    transition: all 0.4s ease-in-out;
+}
+
+/* 清除浮動影響 */
+.demo:nth-child(3n) {
+    margin-right: 0;
+}
+
+/* 卡片懸停動畫：如同魔戒文字浮現發光 */
+.demo:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-primary);
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* 圖片容器：加上內縮邊框，讓滿版圖片像魔法鏡子 */
+.demo .logo {
+    width: 100%;
+    height: 220px;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    margin-bottom: 15px;
+}
+
+/* 卡片內的文字設定 */
+.mytitle04 {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    padding-left: 8px;
+    border-left: 3px solid var(--gold-primary);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* 電話與次要資訊稍微黯淡，凸顯質感 */
+.mytitle04:last-of-type {
+    border-left-color: var(--text-muted);
+    color: var(--text-muted);
+}
+
+/* 響應式：手機與平板呈現單欄史詩長卷 */
+@media screen and (max-width: 1024px) {
+    .wrapper {
+        width: 94%;
+        padding: 15px;
+    }
+    .demo {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 25px;
+    }
+    .mytitle02 {
+        font-size: 2.2rem;
+    }
+}
+  
+
+    </style>
+</head>
+<body>
+    <div class="display-1 zm-300 mytitle02">地方美食餐廳列表</div>
+    <div class="wrapper" id="foodlist">
+        <div class="demo">
+            <div class="logo bg-img"  style="background-image: url(images/josephine-bevan-MtRfjqCLJaU-unsplash.jpg);"></div>
+            <p class="mytitle04">店家:xxx</p>
+            <p class="mytitle04">電話:00000</p>
+        </div>
+    </div>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="js/travelfood.js"></script>
+    <script>
+        console.log(food);
+       
+        food.forEach(function(item){
+        // console.log(item.Name);
+        // console.log(item.City);
+        // console.log(item.Email); 
+        $("#foodlist").append('<div class="demo" ><div class="logo bg-img" style="background-image: url(' + item.PicURL +');"></div><p class="mytitle04">店家:'+item.Name+'</p><p class="mytitle04">電話:' + item.Tel +'</p></div>');          
+    });
+
+// // 清空 wrapper 裡原本寫死展示用的 HTML
+//     $('.wrapper').empty();
+
+//     food.forEach(function(item){
+//         // 組合出每個美食項目的 HTML 卡片
+//         let card = `
+//             <div class="demo">
+//                 <div class="logo bg-img" style="background-image: url('${item.PicURL || 'images/maria-ivanova-AD-DI3T_G-o-unsplash.jpg'}');"></div>
+//                 <p class="mytitle04">店家：${item.Name || '無店家名稱'}</p>
+//                 <p class="mytitle04">縣市：${item.City || '無縣市資訊'}</p>
+//                 <p class="mytitle04">Email：${item.Email || '無 Email'}</p>
+//             </div>
+//         `;
+        
+//         // 插入到畫面中的 .wrapper 容器內
+//         $('.wrapper').append(card);
+//     });
+
+
+    </script>
+</body>
+</html>
