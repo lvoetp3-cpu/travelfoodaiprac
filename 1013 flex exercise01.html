@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH7 flex-時間軸(timeline)</title>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/myall-css.css">
+    <style>
+        .imgbox {
+            height: 220px;
+            background-size: cover;       /* 新增：確保背景圖填滿區塊 */
+            background-position: center;   /* 新增：背景圖置中 */
+        }
+
+        /* 時間軸中線容器 */
+        .timeline-section {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        /* 時間軸紅線 */
+        .timeline-section::before {
+            position: absolute;
+            content: ""; /* 修正：如果不需要文字，請保持雙引號留空 */
+            width: 8px;  /* 微調：20px 有點太粗，改成 8px 較精緻 */
+            background-color: red;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+        }
+
+        /* 時間軸每一列的容器 */
+        .timeline-section-pointer {
+            position: relative; /* 修正：改成 relative，防止所有列重疊，並作為圓點的定位基準 */
+            margin-bottom: 40px; /* 新增：讓每組內容有上下間距 */
+        }
+
+        /* 時間軸上的綠點 */
+        .timeline-section-pointer::before {
+            position: absolute;
+            content: "";
+            width: 24px;
+            height: 24px;
+            background-color: brown;
+            border-radius: 50%;
+            border: 6px solid rgb(11, 95, 67);
+            left: 50%;
+            top: 50%; /* 修改：置中於該列的垂直中央 */
+            transform: translate(-50%, -50%); /* 修改：完美置中 */
+            z-index: 10; /* 新增：確保圓點壓在紅線上層 */
+        }
+
+        @media screen and (max-width: 768px){
+            .timeline-section::before, .timeline-section-pointer::before{
+                display: none;
+            }
+            .timeline-section::before,
+            .timeline-section-pointer::before {
+                left: -20px;
+            
+            }
+        }
+
+        
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="display-2 text-center zm-500 my-4">時間軸Timeline</div>
+        <div class="timeline-section">
+            
+            <!-- 第一組 -->
+            <div class="row align-items-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/minieatsbanner.png);">
+                        <div class="rollerbox-t">
+                            <button class="btn btn-warning">查看更多</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 zm-100 text-center">01標題</div>
+                    <div class="h4 zm-100 text-center">桌面行為不願綠色思想信箱北方解釋至少在我時刻，才是怎麼會獨。</div>
+                </div>
+            </div>
+
+            <!-- 第二組 -->
+            <div class="row flex-row-reverse align-items-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/minieatsbanner.png);"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 zm-100 text-center">02標題</div>
+                    <p>進入各自藍色不得不類別，女友類別咱們對待，想到教材昨日付款。</p>
+                </div>
+            </div>
+
+            <!-- 第三組（修正結構） -->
+            <div class="row align-items-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/minieatsbanner.png);"></div>
+                </div> <!-- 修正：補上關閉標籤 -->
+                <div class="col-md-6"> <!-- 修正：將 row 錯誤改回 col-md-6 -->
+                    <div class="h2 zm-100 text-center">03標題</div>
+                    <p>就有一批風景本帖本地而是電視台將軍出現在辦公室，等待付款老大古代銷售，具有他們。</p>
+                    <p>以前穩定全文市委春節，將在搜尋引擎，辦。</p>
+                </div>
+            </div>
+
+            <!-- 第四組 -->
+            <div class="row flex-row-reverse align-items-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/minieatsbanner.png);"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 zm-100 text-center">標題 四</div>
+                    <div class="h4 zm-100 text-center">桌面行為不願綠色思想信箱北方解釋至少在我時刻，才是怎麼會獨。</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

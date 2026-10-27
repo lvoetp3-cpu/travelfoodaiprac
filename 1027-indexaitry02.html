@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赤核學院｜AI 輔助全端程式設計 - 課程線上報名</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230e1116'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%23e10600' stroke-width='4'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='28' fill='%23e10600' font-family='sans-serif'%3E赤%3C/text%3E%3C/svg%3E">
+    <!-- 教室資料夾常見為 CSS/（大寫）；同時保留小寫與 CDN，避免只複製 HTML 時變白底 -->
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+    <link rel="stylesheet" href="CSS/myall.css">
+    <style>
+/* ========================================
+   赤核學院｜AI 輔助全端程式設計
+   賽博龐克企業風：紅 / 白 / 深灰
+   以 :root 統一管理色彩，避免華麗動畫
+   ======================================== */
+
+:root {
+  --cp-bg: #0e1116;
+  --cp-bg-alt: #14191f;
+  --cp-surface: #1a2129;
+  --cp-surface-2: #222a33;
+  --cp-border: #303841;
+  --cp-red: #e10600;
+  --cp-red-hover: #ff2a22;
+  --cp-red-dim: rgba(225, 6, 0, 0.16);
+  --cp-white: #f5f7fa;
+  --cp-muted: #9aa4b2;
+  --cp-success: #3dd68c;
+  --cp-danger: #ff5c5c;
+  --cp-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --bs-primary: #e10600;
+  --bs-primary-rgb: 225, 6, 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+#course,
+#signup,
+#result {
+  scroll-margin-top: 84px;
+}
+
+body {
+  background-color: var(--cp-bg);
+  background-image:
+    linear-gradient(rgba(225, 6, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(225, 6, 0, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  color: var(--cp-white);
+  font-family: "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  min-height: 100vh;
+}
+
+.zm-500 {
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.zm-300 {
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- 導覽列 ---------- */
+.cp-navbar {
+  background: rgba(14, 17, 22, 0.94);
+  border-bottom: 1px solid var(--cp-border);
+  backdrop-filter: blur(8px);
+}
+
+.cp-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  border: 1px solid var(--cp-red);
+  color: var(--cp-red);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.cp-navbar .navbar-brand {
+  color: var(--cp-white);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.cp-navbar .nav-link {
+  color: var(--cp-muted);
+  letter-spacing: 0.08em;
+}
+
+.cp-navbar .nav-link:hover,
+.cp-navbar .nav-link.active {
+  color: var(--cp-white);
+}
+
+.cp-navbar .nav-link.active {
+  border-bottom: 2px solid var(--cp-red);
+}
+
+.navbar-toggler {
+  border-color: var(--cp-red);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem var(--cp-red-dim);
+}
+
+.cp-sim-badge {
+  border: 1px solid var(--cp-red);
+  color: var(--cp-red);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.55rem;
+}
+
+/* ---------- Banner ---------- */
+.cp-hero {
+  position: relative;
+  padding: 4.5rem 0 3.5rem;
+  background:
+    linear-gradient(90deg, var(--cp-red) 0 6px, transparent 6px),
+    linear-gradient(180deg, #1a0b0b 0%, var(--cp-bg) 100%);
+  border-bottom: 1px solid var(--cp-border);
+  overflow: hidden;
+}
+
+.cp-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  pointer-events: none;
+}
+
+.cp-kicker {
+  color: var(--cp-red);
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.cp-hero h1 {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+}
+
+.cp-lead {
+  color: var(--cp-muted);
+  max-width: 42rem;
+}
+
+.cp-chip {
+  display: inline-block;
+  border: 1px solid var(--cp-border);
+  background: var(--cp-surface);
+  color: var(--cp-white);
+  padding: 0.28rem 0.7rem;
+  margin: 0.2rem 0.25rem 0.2rem 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- 版面卡片 ---------- */
+.cp-panel {
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-left: 3px solid var(--cp-red);
+  box-shadow: var(--cp-shadow);
+}
+
+.cp-section-title {
+  background: var(--cp-red);
+  color: var(--cp-white);
+  letter-spacing: 0.18em;
+}
+
+.cp-side-card {
+  background: var(--cp-surface-2);
+  border: 1px solid var(--cp-border);
+}
+
+.cp-side-card h2,
+.cp-side-card h3 {
+  color: var(--cp-white);
+  letter-spacing: 0.1em;
+}
+
+.cp-side-card li {
+  color: var(--cp-muted);
+}
+
+.cp-side-card li strong {
+  color: var(--cp-white);
+}
+
+.cp-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--cp-red);
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* ---------- 表單 ---------- */
+.form-label {
+  color: var(--cp-white);
+  letter-spacing: 0.04em;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--cp-bg);
+  border: 1px solid var(--cp-border);
+  color: var(--cp-white);
+}
+
+.form-control::placeholder {
+  color: #6d7784;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--cp-bg);
+  color: var(--cp-white);
+  border-color: var(--cp-red);
+  box-shadow: 0 0 0 0.2rem var(--cp-red-dim);
+}
+
+.form-select {
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f5f7fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select option {
+  background-color: var(--cp-surface);
+  color: var(--cp-white);
+}
+
+.form-check-input {
+  background-color: var(--cp-bg);
+  border-color: var(--cp-border);
+}
+
+.form-check-input:focus {
+  border-color: var(--cp-red);
+  box-shadow: 0 0 0 0.2rem var(--cp-red-dim);
+}
+
+.form-check-input:checked {
+  background-color: var(--cp-red);
+  border-color: var(--cp-red);
+}
+
+.form-check-label {
+  color: var(--cp-white);
+}
+
+.text-primary {
+  color: var(--cp-red) !important;
+}
+
+.form-range {
+  accent-color: var(--cp-red);
+}
+
+.form-range:focus {
+  box-shadow: none;
+}
+
+.form-range::-webkit-slider-thumb {
+  background-color: var(--cp-red) !important;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px var(--cp-bg), 0 0 0 0.25rem var(--cp-red-dim);
+}
+
+.form-range::-moz-range-thumb {
+  background-color: var(--cp-red);
+  border: none;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  background-color: var(--cp-border);
+}
+
+.form-range::-moz-range-track {
+  background-color: var(--cp-border);
+}
+
+.form-control.is-valid,
+.form-select.is-valid,
+.card-input.is-valid {
+  border-color: var(--cp-success);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid,
+.card-input.is-invalid {
+  border-color: var(--cp-danger);
+}
+
+.valid-feedback {
+  color: var(--cp-success);
+}
+
+.invalid-feedback {
+  color: var(--cp-danger);
+}
+
+.card-input {
+  max-width: 6.5rem;
+  letter-spacing: 0.16em;
+}
+
+#card_msg,
+#interest_msg,
+#classmode_msg,
+#switch_msg {
+  min-height: 1.4em;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--cp-red);
+  --bs-btn-border-color: var(--cp-red);
+  --bs-btn-hover-bg: var(--cp-red-hover);
+  --bs-btn-hover-border-color: var(--cp-red-hover);
+  --bs-btn-active-bg: #c10500;
+  --bs-btn-active-border-color: #c10500;
+  --bs-btn-disabled-bg: #7a2a27;
+  --bs-btn-disabled-border-color: #7a2a27;
+  letter-spacing: 0.14em;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+.btn-secondary {
+  --bs-btn-bg: #2a323c;
+  --bs-btn-border-color: var(--cp-border);
+  --bs-btn-hover-bg: #3a4450;
+  --bs-btn-hover-border-color: #4a5561;
+  --bs-btn-color: var(--cp-white);
+  letter-spacing: 0.14em;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+#showmsg .h2 {
+  font-size: 1.15rem;
+  color: var(--cp-white);
+  border-bottom: 1px solid var(--cp-border);
+  padding-bottom: 0.55rem;
+  margin-bottom: 0.85rem;
+}
+
+.cp-result-empty {
+  color: var(--cp-muted);
+}
+
+/* ---------- Footer ---------- */
+.cp-footer {
+  border-top: 1px solid var(--cp-border);
+  background: var(--cp-bg-alt);
+  color: var(--cp-muted);
+  font-size: 0.88rem;
+}
+
+.cp-footer a {
+  color: var(--cp-white);
+  text-decoration: none;
+}
+
+.cp-footer a:hover {
+  color: var(--cp-red);
+}
+
+/* SweetAlert2 深色對齊 */
+.swal2-popup {
+  background: var(--cp-surface) !important;
+  color: var(--cp-white) !important;
+  border: 1px solid var(--cp-border);
+}
+
+.swal2-title,
+.swal2-html-container {
+  color: var(--cp-white) !important;
+}
+
+@media (max-width: 991.98px) {
+  .cp-hero {
+    padding: 3rem 0 2.2rem;
+  }
+
+  .card-input {
+    max-width: none;
+    flex: 1 1 0;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- 品牌導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-dark cp-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#course">
+                <span class="cp-brand-mark">赤</span>
+                赤核學院 AKANUCLEUS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="切換導覽">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#course">課程介紹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#signup">線上報名</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#result">報名確認</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <span class="cp-sim-badge">教學模擬</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AI 課程介紹 Banner -->
+    <header class="cp-hero" id="course">
+        <div class="container position-relative" style="z-index: 1;">
+            <p class="cp-kicker mb-3">ENTERPRISE EDUCATION / FRONT-END TRACK</p>
+            <h1 class="display-5 mb-3">AI 輔助全端程式設計</h1>
+            <p class="cp-lead mb-4">
+                本課程帶領學員以 HTML、CSS、JavaScript 建立頁面骨架與樣式，
+                再用 jQuery 與 AJAX 處理互動與外部資料，並學習如何與 AI 協作加速除錯、重構與文件撰寫。
+                本站為課堂教學模擬網站，僅示範前端表單驗證與草稿暫存，非正式官方授權頁面。
+            </p>
+            <div>
+                <span class="cp-chip">HTML</span>
+                <span class="cp-chip">CSS</span>
+                <span class="cp-chip">JavaScript</span>
+                <span class="cp-chip">jQuery</span>
+                <span class="cp-chip">AJAX</span>
+                <span class="cp-chip">AI 協作</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4 py-lg-5">
+        <div class="row g-4">
+            <!-- 桌面：左側表單 col-lg-8 -->
+            <div class="col-lg-8" id="signup">
+                <div class="display-6 cp-section-title zm-500 text-center py-3 mb-4">課程線上報名表</div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel">
+                        <div class="mb-3 p-3">
+                            <label for="username" class="form-label">姓名</label>
+                            <input type="text" class="form-control form-control-lg" id="username"
+                                placeholder="姓名字串長度2-8!" autocomplete="name">
+                            <div class="valid-feedback">姓名字串長度符合規定</div>
+                            <div class="invalid-feedback">姓名字串長度不符合規定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel">
+                        <div class="mb-3 p-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control form-control-lg" id="email"
+                                placeholder="請輸入 Email (需包含@)" autocomplete="email">
+                            <div class="valid-feedback">Email 格式與長度符合規定</div>
+                            <div class="invalid-feedback">Email 格式或長度不符合規定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel">
+                        <div class="mb-3 p-3">
+                            <label for="password" class="form-label">密碼</label>
+                            <input type="password" class="form-control form-control-lg" id="password"
+                                placeholder="請輸入密碼 (長度8-16!)" autocomplete="new-password">
+                            <div class="valid-feedback">密碼字串長度符合規定</div>
+                            <div class="invalid-feedback">密碼字串長度不符合規定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel">
+                        <div class="mb-3 p-3">
+                            <label for="phone" class="form-label">手機</label>
+                            <input type="text" class="form-control form-control-lg" id="phone"
+                                placeholder="請輸入手機號碼 (10位數，09開頭)" autocomplete="tel">
+                            <div class="valid-feedback">手機號碼格式符合規定</div>
+                            <div class="invalid-feedback">手機號碼格式不符合規定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel mb-3">
+                        <div class="p-3">
+                            <label for="city" class="form-label">居住縣市</label>
+                            <select name="city" id="city" class="form-select form-select-lg">
+                                <option value="" disabled selected>...請選擇縣市</option>
+                            </select>
+                            <div class="valid-feedback">已選擇縣市名稱</div>
+                            <div class="invalid-feedback">未選擇縣市名稱</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel mb-3">
+                        <div class="p-3">
+                            <label class="form-label d-block">感興趣的課程(可複選)</label>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="chk01" value="HTML/CSS"
+                                    name="interest">
+                                <label for="chk01" class="form-check-label">HTML。CSS</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="chk02" value="Vibe Coding"
+                                    name="interest">
+                                <label for="chk02" class="form-check-label">Vibe Coding</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="chk03"
+                                    value="PYTHON/JAVA/GOLANG" name="interest">
+                                <label for="chk03" class="form-check-label">PYTHON。JAVA。GOLANG</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input" id="chk04" value="JUST ASK"
+                                    name="interest">
+                                <label for="chk04" class="form-check-label">JUST ASK</label>
+                            </div>
+                            <div id="interest_msg" class="text-secondary mt-1">
+                                請至少選擇一項課程
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel mb-3">
+                        <div class="p-3">
+                            <label class="form-label d-block">偏好的上課方式(單選)</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="rad01" value="實體課程" name="classmode">
+                                <label for="rad01" class="form-check-label">實體課程</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="rad02" value="線上課程" name="classmode">
+                                <label for="rad02" class="form-check-label">線上課程</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="rad03" value="混合課程" name="classmode">
+                                <label for="rad03" class="form-check-label">混合課程</label>
+                            </div>
+                            <div id="classmode_msg" class="text-secondary mt-1">請選擇一樣上課方式</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel mb-3">
+                        <div class="p-3">
+                            <label class="form-label fw-bold">課程通知設定</label>
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input" role="switch" id="switch01"
+                                    name="switch01">
+                                <label for="switch01" class="form-check-label">是否接收最新的課程資訊</label>
+                            </div>
+                            <div id="switch_msg" class="text-secondary mt-2">目前狀態：關閉</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel mb-3">
+                        <div class="p-3">
+                            <label for="range01" class="form-label">程式能力自我評估：<span
+                                    class="text-primary zm-300 fs-3" id="range_val">5</span>分
+                            </label>
+                            <input type="range" class="form-range" min="1" max="10" step="1" value="5" id="range01">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-secondary">1-完全不會</span>
+                                <span class="text-secondary">10-非常熟悉</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 cp-panel mb-3">
+                        <div class="p-3">
+                            <label for="card1" class="form-label">信用卡卡號</label>
+                            <div class="d-flex align-items-center gap-2" id="credit_card_group">
+                                <input type="text" class="form-control text-center card-input" id="card1"
+                                    maxlength="4" placeholder="0000" inputmode="numeric" pattern="[0-9]*"
+                                    autocomplete="off">
+                                <span>-</span>
+                                <input type="text" class="form-control text-center card-input" id="card2"
+                                    maxlength="4" placeholder="0000" inputmode="numeric" pattern="[0-9]*"
+                                    autocomplete="off">
+                                <span>-</span>
+                                <input type="text" class="form-control text-center card-input" id="card3"
+                                    maxlength="4" placeholder="0000" inputmode="numeric" pattern="[0-9]*"
+                                    autocomplete="off">
+                                <span>-</span>
+                                <input type="text" class="form-control text-center card-input" id="card4"
+                                    maxlength="4" placeholder="0000" inputmode="numeric" pattern="[0-9]*"
+                                    autocomplete="off">
+                            </div>
+                            <div id="card_msg" class="form-text text-secondary">請輸入 16 位數信用卡卡號</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="col-12 text-center mt-3">
+                        <button type="button" class="btn btn-primary btn-lg me-2 mb-2" id="ok_btn">確認送出</button>
+                        <button type="button" class="btn btn-secondary btn-lg mb-2" id="reset_btn">重新填寫</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 桌面：右側課程特色與報名提醒 col-lg-4 -->
+            <div class="col-lg-4">
+                <aside class="cp-side-card p-4 mb-4 sticky-lg-top" style="top: 88px;">
+                    <h2 class="h5 mb-3"><span class="cp-dot"></span>課程特色</h2>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-3"><strong>HTML / CSS</strong><br>建立語意化結構與 RWD 版面。</li>
+                        <li class="mb-3"><strong>JavaScript</strong><br>處理事件、驗證規則與畫面更新。</li>
+                        <li class="mb-3"><strong>jQuery / AJAX</strong><br>簡化 DOM 操作，讀取縣市 JSON 資料。</li>
+                        <li class="mb-3"><strong>AI 協作</strong><br>練習與 AI 一起除錯、重構與撰寫註解，而不是只複製貼上。</li>
+                    </ul>
+                    <h3 class="h5 mb-3"><span class="cp-dot"></span>報名提醒</h3>
+                    <ul class="small ps-3 mb-0">
+                        <li>姓名 2～8 字；Email 需包含 @，長度 3～30 字。</li>
+                        <li>密碼 8～16 字，不會寫入 LocalStorage。</li>
+                        <li>手機須符合臺灣格式：09 開頭共 10 碼。</li>
+                        <li>感興趣課程至少選一項，上課方式必選一項。</li>
+                        <li>按下送出僅為前端模擬，不會寫入資料庫。</li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+
+        <!-- 報名資料確認 -->
+        <div class="row mt-4" id="result">
+            <div class="col-12">
+                <div class="display-6 cp-section-title zm-500 text-center py-3 my-3">報名資料確認</div>
+            </div>
+            <div class="col-12 cp-panel p-4" id="showmsg">
+                <p class="cp-result-empty mb-0">送出成功後，報名摘要會顯示於此。目前尚未送出。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="cp-footer py-4 mt-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div>赤核學院 AKANUCLEUS｜AI 輔助全端程式設計 教學模擬站</div>
+            <div>本網站僅供課堂練習，不代表任何官方機構，亦無學費或開課檔期資訊。</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.7.1.min.js"><\/script>')</script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        if (typeof bootstrap === "undefined") {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"><\/script>');
+        }
+    </script>
+    <script>
+        // 1. 初始化所有驗證 Flag 狀態
+        let flag_username = false;
+        let flag_email = false;
+        let flag_password = false;
+        let flag_phone = false;
+        let flag_city = false;
+        let flag_interest = false;
+        let flag_classmode = false;
+        let flag_credit_card = false;
+
+        let interest = [];
+        let classmode = "";
+        let switchStatus = false;
+        let range = false;
+        let score = 5;
+
+        // 草稿暫存使用的 key（不使用 localStorage.clear()，避免刪到網站其他資料）
+        const DRAFT_KEYS = [
+            "username",
+            "email",
+            "phone",
+            "city",
+            "interest",
+            "classmode",
+            "switch01",
+            "score"
+        ];
+
+        // 用 file:// 開啟或 JSON 路徑不同時，改用內建縣市清單
+        const FALLBACK_CITIES = [
+            { "CityName": "基隆市" }, { "CityName": "臺北市" }, { "CityName": "新北市" },
+            { "CityName": "桃園市" }, { "CityName": "新竹市" }, { "CityName": "新竹縣" },
+            { "CityName": "苗栗縣" }, { "CityName": "臺中市" }, { "CityName": "彰化縣" },
+            { "CityName": "南投縣" }, { "CityName": "雲林縣" }, { "CityName": "嘉義市" },
+            { "CityName": "嘉義縣" }, { "CityName": "臺南市" }, { "CityName": "高雄市" },
+            { "CityName": "屏東縣" }, { "CityName": "宜蘭縣" }, { "CityName": "花蓮縣" },
+            { "CityName": "臺東縣" }, { "CityName": "澎湖縣" }, { "CityName": "金門縣" },
+            { "CityName": "連江縣" }
+        ];
+
+        $(function () {
+            // === 2. 即時監聽：姓名輸入框 ===
+            $("#username").on("input", function () {
+                console.log($(this).val().length);
+                const val = $(this).val();
+                // 自動暫存姓名草稿（密碼除外）
+                localStorage.setItem("username", val);
+
+                if (val.length > 1 && val.length < 9) {
+                    console.log("符合規定");
+                    $(this).removeClass("is-invalid").addClass("is-valid");
+                    flag_username = true;
+                } else {
+                    console.log("不符合規定!");
+                    $(this).removeClass("is-valid").addClass("is-invalid");
+                    flag_username = false;
+                }
+            });
+
+            // === 3. 即時監聽：Email 輸入框 ===
+            // 教學重點：使用 includes() 檢查 @，並搭配正規表達式確認長度 3-30
+            $("#email").on("input change", function () {
+                let val = $(this).val();
+                let vallen = val.length;
+                const emailLengthReg = /^.{3,30}$/;
+                console.log("當前長度: " + vallen + " , 是否包含@: " + val.includes("@"));
+
+                localStorage.setItem("email", val);
+
+                if (emailLengthReg.test(val) && val.includes("@")) {
+                    console.log("符合規定");
+                    $(this).removeClass("is-invalid").addClass("is-valid");
+                    flag_email = true;
+                } else {
+                    console.log("不符合規定!");
+                    $(this).removeClass("is-valid").addClass("is-invalid");
+                    flag_email = false;
+                }
+            });
+
+            // === 4. 即時監聽：密碼輸入框（不寫入 LocalStorage） ===
+            $("#password").on("input", function () {
+                console.log($(this).val().length);
+
+                if ($(this).val().length >= 8 && $(this).val().length <= 16) {
+                    console.log("符合規定");
+                    $(this).removeClass("is-invalid").addClass("is-valid");
+                    flag_password = true;
+                } else {
+                    console.log("不符合規定!");
+                    $(this).removeClass("is-valid").addClass("is-invalid");
+                    flag_password = false;
+                }
+            });
+
+            // === 5. 即時監聽：手機輸入框（臺灣手機 /^09\d{8}$/） ===
+            $("#phone").on("input", function () {
+                let val = $(this).val();
+                let vallen = val.length;
+                const phoneReg = /^09\d{8}$/;
+                console.log("當前長度: " + vallen + " , 是否為09開頭: " + val.startsWith("09"));
+
+                localStorage.setItem("phone", val);
+
+                if (phoneReg.test(val)) {
+                    console.log("符合規定");
+                    $(this).removeClass("is-invalid").addClass("is-valid");
+                    flag_phone = true;
+                } else {
+                    console.log("不符合規定!");
+                    $(this).removeClass("is-valid").addClass("is-invalid");
+                    flag_phone = false;
+                }
+            });
+
+            // === 5-2. 即時監聽：信用卡卡號 (自動跳格與驗證) ===
+            $(".card-input").on("input", function () {
+                let currentVal = $(this).val().replace(/\D/g, "");
+                $(this).val(currentVal);
+
+                if (currentVal.length === 4) {
+                    $(this).nextAll(".card-input").first().focus();
+                }
+
+                let totalCardNumber = $("#card1").val() + $("#card2").val() + $("#card3").val() + $("#card4").val();
+
+                if (totalCardNumber.length === 16) {
+                    $(".card-input").removeClass("is-invalid").addClass("is-valid");
+                    $("#card_msg").removeClass("text-secondary text-danger").addClass("text-success").text("信用卡格式正確！");
+                    flag_credit_card = true;
+                } else {
+                    $(".card-input").removeClass("is-valid");
+                    $("#card_msg").removeClass("text-success text-danger").addClass("text-secondary").text("請輸入 16 位數信用卡卡號");
+                    flag_credit_card = false;
+                }
+            });
+
+            // === 6. 讀取外部縣市 JSON 資料 ===
+            $.ajax({
+                type: "GET",
+                url: "js/json/CityCountyData.json",
+                dataType: "json",
+                success: showdata_city,
+                error: function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "js/CityCountyData.json",
+                        dataType: "json",
+                        success: showdata_city,
+                        error: function () {
+                            if (window.Swal) {
+                                Swal.fire({
+                                    title: "改用內建縣市清單",
+                                    text: "找不到 js/json/CityCountyData.json（常見於直接雙擊 HTML）。已改用內建資料，表單仍可練習。",
+                                    icon: "info",
+                                    confirmButtonText: "確認",
+                                    confirmButtonColor: "#e10600"
+                                });
+                            }
+                            showdata_city(FALLBACK_CITIES);
+                        }
+                    });
+                }
+            });
+
+            // === 7. 監聽：縣市選單 change 事件 ===
+            $("#city").on("change", function () {
+                console.log($(this).val());
+
+                if ($(this).val() === "") {
+                    $(this).removeClass("is-valid").addClass("is-invalid");
+                    flag_city = false;
+                } else {
+                    $(this).removeClass("is-invalid").addClass("is-valid");
+                    flag_city = true;
+                    localStorage.setItem("city", $(this).val());
+                }
+            });
+
+            // === 8. 監聽：多選核取方塊 (Checkbox) ===
+            $("input[name='interest']").on("change", function () {
+                interest = [];
+                $("input[name='interest']:checked").each(function () {
+                    console.log($(this).val());
+                    interest.push($(this).val());
+                });
+
+                console.log(interest);
+                localStorage.setItem("interest", JSON.stringify(interest));
+
+                if (interest.length > 0) {
+                    flag_interest = true;
+                    $("#interest_msg")
+                        .removeClass("text-secondary text-danger")
+                        .addClass("text-success")
+                        .text("已經選擇 " + interest.length + " 項課程");
+                } else {
+                    flag_interest = false;
+                    $("#interest_msg")
+                        .removeClass("text-secondary text-success")
+                        .addClass("text-danger")
+                        .text("請至少選擇一項課程");
+                }
+            });
+
+            // === 9. 監聽：單選上課方式 (Radio) ===
+            $("input[name='classmode']").on("change", function () {
+                classmode = $("input[name='classmode']:checked").val() || "";
+                console.log(classmode);
+                localStorage.setItem("classmode", classmode);
+
+                if (classmode !== "") {
+                    flag_classmode = true;
+                    $("#classmode_msg")
+                        .removeClass("text-secondary text-danger")
+                        .addClass("text-success")
+                        .text("已經選擇：" + classmode);
+                }
+            });
+
+            // === 10. 監聽：通知設定開關 (Switch) ===
+            $("#switch01").on("change", function () {
+                console.log($(this).prop("checked"));
+                switchStatus = $(this).prop("checked");
+                // Switch 以字串 "true" / "false" 寫入，還原時再轉回布林值
+                localStorage.setItem("switch01", switchStatus ? "true" : "false");
+
+                if (switchStatus) {
+                    $("#switch_msg")
+                        .removeClass("text-secondary")
+                        .addClass("text-success")
+                        .text("目前狀態：開啟");
+                } else {
+                    $("#switch_msg")
+                        .removeClass("text-success")
+                        .addClass("text-secondary")
+                        .text("目前狀態：關閉");
+                }
+            });
+
+            // === 11. 監聽：自我評估滑桿 (Range) ===
+            $("#range01").on("input", function () {
+                console.log($(this).val());
+                score = $(this).val();
+                range = true;
+                $("#range_val").text(score);
+                localStorage.setItem("score", String(score));
+            });
+
+            // === 12. 監聽：確認送出按鈕 (#ok_btn) ===
+            $("#ok_btn").on("click", function () {
+                if (flag_username && flag_email && flag_password && flag_phone && flag_city && flag_interest && flag_classmode && flag_credit_card) {
+                    console.log("符合規定!");
+
+                    Swal.fire({
+                        title: "是否確認送出報名資料？",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "確認送出",
+                        denyButtonText: "取消",
+                        icon: "question",
+                        confirmButtonColor: "#e10600",
+                        denyButtonColor: "#2a323c"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "送出成功!",
+                                text: "這是前端模擬送出，資料並未寫入資料庫。",
+                                icon: "success",
+                                confirmButtonColor: "#e10600"
+                            });
+
+                            // 模擬報名成功後清除草稿；表單畫面仍保留給確認區讀取
+                            clearLocalStorage();
+
+                            let switch_msg = switchStatus ? "目前狀態：開啟" : "目前狀態：關閉";
+
+                            // 避免把使用者輸入直接當 HTML 執行：先跳脫再插入
+                            const strHTML = `
+                        <div class="h2">姓名：${escapeHtml($("#username").val())}</div>
+                        <div class="h2">Email：${escapeHtml($("#email").val())}</div>
+                        <div class="h2">密碼：xxxxx</div>
+                        <div class="h2">電話：${escapeHtml($("#phone").val())}</div>
+                        <div class="h2">信用卡號：${escapeHtml($("#card1").val())}-****-****-${escapeHtml($("#card4").val())}</div>
+                        <div class="h2">居住地：${escapeHtml($("#city").val())}</div>
+                        <div class="h2">感興趣的課程：${escapeHtml(interest.join("、"))}</div>
+                        <div class="h2">偏好的上課方式：${escapeHtml(classmode)}</div>
+                        <div class="h2">${escapeHtml(switch_msg)}</div>
+                        <div class="h2">程式能力自我評估：${escapeHtml(String(score))}分</div>
+                    `;
+
+                            $("#showmsg").html(strHTML);
+                        } else if (result.isDenied) {
+                            Swal.fire({
+                                title: "已取消動作",
+                                text: "資料未送出。",
+                                icon: "info",
+                                confirmButtonColor: "#e10600"
+                            });
+                        }
+                    });
+
+                } else {
+                    console.log("不符合規定!");
+
+                    Swal.fire({
+                        title: "表單內容錯誤，請修正?",
+                        text: "請依紅框與提示修正後再送出。已填內容會保留。",
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonText: "確認",
+                        icon: "error",
+                        confirmButtonColor: "#e10600"
+                    });
+
+                    if (!flag_username) $("#username").removeClass("is-valid").addClass("is-invalid");
+                    if (!flag_email) $("#email").removeClass("is-valid").addClass("is-invalid");
+                    if (!flag_password) $("#password").removeClass("is-valid").addClass("is-invalid");
+                    if (!flag_phone) $("#phone").removeClass("is-valid").addClass("is-invalid");
+                    if (!flag_city) $("#city").removeClass("is-valid").addClass("is-invalid");
+
+                    if (!flag_credit_card) {
+                        $(".card-input").removeClass("is-valid").addClass("is-invalid");
+                        $("#card_msg").removeClass("text-secondary text-success").addClass("text-danger").text("信用卡卡號未填寫完整！");
+                    }
+
+                    if (!flag_interest) {
+                        $("#interest_msg").removeClass("text-secondary text-success").addClass("text-danger").text("請至少選擇一項課程");
+                    }
+                    if (!flag_classmode) {
+                        $("#classmode_msg").removeClass("text-secondary text-success").addClass("text-danger").text("請選擇一樣上課方式");
+                    }
+                }
+            });
+
+            // === 13. 監聽：重新填寫按鈕 (#reset_btn) ===
+            $("#reset_btn").on("click", function () {
+                console.log("重新填寫 #reset_btn");
+                clearLocalStorage();
+                location.reload();
+            });
+
+            // === 自動讀取與還原暫存（縣市必須等 AJAX 完成後再還原） ===
+            restoreDraftExceptCity();
+        }); // 確實關閉前端主執行緒 $(function ()
+
+        // ========================================================
+        // 獨立在最外層的自訂清除函式、跳脫、暫存還原與縣市渲染
+        // ========================================================
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function clearLocalStorage() {
+            // 只移除本表單草稿，不呼叫 localStorage.clear()
+            localStorage.removeItem("username");
+            localStorage.removeItem("email");
+            localStorage.removeItem("phone");
+            DRAFT_KEYS.forEach(function (key) {
+                localStorage.removeItem(key);
+            });
+        }
+
+        function restoreDraftExceptCity() {
+            let savedUsername = localStorage.getItem("username");
+            if (savedUsername !== null) {
+                $("#username").val(savedUsername);
+                $("#username").trigger("input");
+            }
+
+            let savedEmail = localStorage.getItem("email");
+            if (savedEmail !== null) {
+                $("#email").val(savedEmail);
+                $("#email").trigger("input");
+            }
+
+            let savedPhone = localStorage.getItem("phone");
+            if (savedPhone !== null) {
+                $("#phone").val(savedPhone);
+                $("#phone").trigger("input");
+            }
+
+            // Checkbox 陣列：JSON.parse 還原後勾選，並觸發 change 以同步旗標與提示
+            let savedInterest = localStorage.getItem("interest");
+            if (savedInterest !== null) {
+                try {
+                    const arr = JSON.parse(savedInterest);
+                    if (Array.isArray(arr)) {
+                        $("input[name='interest']").each(function () {
+                            $(this).prop("checked", arr.indexOf($(this).val()) !== -1);
+                        });
+                        $("input[name='interest']").trigger("change");
+                    }
+                } catch (err) {
+                    console.log("interest 草稿解析失敗", err);
+                }
+            }
+
+            let savedMode = localStorage.getItem("classmode");
+            if (savedMode !== null && savedMode !== "") {
+                $("input[name='classmode']").each(function () {
+                    $(this).prop("checked", $(this).val() === savedMode);
+                });
+                $("input[name='classmode']:checked").trigger("change");
+            }
+
+            // Switch 的 "true" / "false" 字串轉回布林值
+            let savedSwitch = localStorage.getItem("switch01");
+            if (savedSwitch !== null) {
+                $("#switch01").prop("checked", savedSwitch === "true");
+                $("#switch01").trigger("change");
+            }
+
+            let savedScore = localStorage.getItem("score");
+            if (savedScore !== null) {
+                $("#range01").val(savedScore);
+                $("#range01").trigger("input");
+            }
+        }
+
+        function restoreCityDraft() {
+            let savedCity = localStorage.getItem("city");
+            if (savedCity !== null && savedCity !== "") {
+                $("#city").val(savedCity);
+                $("#city").trigger("change");
+            }
+        }
+
+        function showdata_city(data) {
+            console.log(data);
+            $("#city").empty();
+            $("#city").append('<option value="" class="text-center zm-300">---請選擇縣市名稱---</option>');
+
+            data.forEach(function (item, index) {
+                console.log(item.CityName);
+                const count = index + 1;
+                const strHTML = `<option value="${escapeHtml(item.CityName)}">${count}:${escapeHtml(item.CityName)}</option>`;
+                $("#city").append(strHTML);
+            });
+
+            // 縣市選項產生完成後，再還原草稿並同步驗證狀態
+            restoreCityDraft();
+        }
+    </script>
+</body>
+
+</html>

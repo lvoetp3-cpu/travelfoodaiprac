@@ -1,24 +1,406 @@
 <!DOCTYPE html>
-<html lang="zh-Tw">
+<html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>學習歷程首頁</title>
-    <link rel="stylesheet" href="CSS/myall-css.css">
+    <title>學習歷程首頁 - 個人作品集與筆記</title>
+    <!-- 引入 Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <style>
+        :root {
+            --primary: #14263e;
+            --secondary: #264765;
+            --accent: #42bcb2;
+            --light: #f0f4f8;
+            --gray: #526579;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+        }
+
+        /* 共用標題 */
+        .section-title {
+            color: var(--primary);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* 個人介紹 */
+        .profile-section {
+            background: linear-gradient(135deg, #14263e, #285775);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .profile-section h1 {
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .profile-section h4 {
+            color: #77e0d6;
+        }
+
+        /* Roller 共用區域 */
+        .box {
+            height: 230px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .box-title {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .box-title h3 {
+            font-weight: 900;
+        }
+
+        .box-title p {
+            color: #a2e4dd;
+            letter-spacing: 2px;
+        }
+
+        /* Roller 遮罩共用設定 */
+        .rollerbox-t,
+        .rollerbox-b,
+        .rollerbox-l,
+        .rollerbox-r {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(16, 30, 53, 0.95);
+            color: white;
+            transform: translate(0);
+            transition: transform 0.7s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Roller Top */
+        .roller-t .rollerbox-t {
+            transform: translateY(-100%);
+        }
+        .roller-t:hover .rollerbox-t {
+            transform: translateY(0);
+        }
+
+        /* Roller Bottom */
+        .roller-b .rollerbox-b {
+            transform: translateY(100%);
+        }
+        .roller-b:hover .rollerbox-b {
+            transform: translateY(0);
+        }
+
+        /* Roller Left */
+        .roller-l .rollerbox-l {
+            transform: translateX(-100%);
+        }
+        .roller-l:hover .rollerbox-l {
+            transform: translateX(0);
+        }
+
+        /* Roller Right */
+        .roller-r .rollerbox-r {
+            transform: translateX(100%);
+        }
+        .roller-r:hover .rollerbox-r {
+            transform: translateX(0);
+        }
+
+        /* Timeline / 作業清單專區 */
+        .timeline-section {
+            background-color: white;
+            padding: 70px 0;
+        }
+
+        .work-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+
+        .work-card h5 {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .work-card h3 {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .work-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 頁尾 */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer h3 {
+            color: #77e0d6;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="mytitle01">學習歷程筆記展示</div>
-    <ul>
-        <li><a href="0929travelfoodAI.html" target="_blank">JS語法練習使用forEach Json travelfood</a></li>
-        <li><a href="0924jsscripe.html" target="_blank">Console log練習</a></li>
-        <li><a href="0923exercise01.html" target="_blank">0923exercirse練習</a></li>
-        <li><a href="0923exercise01-AI.html" target="_blank">0923exercirse練習W/ AI</a></li>
-        <li><a href="1001 boostrap01.html" target="_blank">1001 boostrap01</a></li>
-        <li><a href="1006 exercise01me.html" target="_blank">1006 exercise01me</a></li>
-        <li><a href="1008 exercise02me.html" target="_blank">1008 exercise02me</a></li>
 
+    <!-- 個人介紹 Header -->
+    <header class="profile-section">
+        <div class="container">
+            <img src="https://i.pravatar.cc/300?img=12" class="profile-avatar" alt="個人照片">
+            <h1 class="mt-4">學習歷程首頁</h1>
+            <h4>Junior Frontend Developer & Learner</h4>
+            <p class="mt-4 fs-5">
+                JavaScript 語法練習 | Bootstrap 版面設計 | 互動網頁開發
+            </p>
+        </div>
+    </header>
 
-    </ul>
+    <!-- 個人履歷 / 快捷 Roller 區塊 -->
+    <section class="container py-5">
+        <h2 class="section-title">導覽與亮點特色</h2>
+
+        <div class="row g-4">
+            <!-- 關於我 -->
+            <div class="col-md-6">
+                <div class="box roller-t">
+                    <div class="box-title">
+                        <h3>關於本站</h3>
+                        <p>ABOUT THIS SITE</p>
+                    </div>
+                    <div class="rollerbox-t">
+                        <h4>學習歷程筆記</h4>
+                        <p>收錄了各階段網頁切版、Bootstrap 框架應用與 JavaScript 實作練習的完整成果。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 專業技能 -->
+            <div class="col-md-6">
+                <div class="box roller-b">
+                    <div class="box-title">
+                        <h3>學習核心</h3>
+                        <p>CORE SKILLS</p>
+                    </div>
+                    <div class="rollerbox-b">
+                        <h4>技術範疇</h4>
+                        <p>
+                            HTML5 / CSS3 / JavaScript<br>
+                            Bootstrap 5 / jQuery / JSON 串接
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 學習歷程清單展示 (Timeline 區塊風格排版) -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">學習歷程清單展示</h2>
+
+            <div class="row g-4">
+                <!-- 項目 1 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="0929travelfoodAI.html" target="_blank">
+                            <h5>JSON & forEach</h5>
+                            <h3>JS語法練習使用forEach Json travelfood</h3>
+                            <p class="text-muted mb-0">點擊前往觀看詳細練習成果與資料串接畫面。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 2 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="0924jsscripe.html" target="_blank">
+                            <h5>JavaScript Basics</h5>
+                            <h3>Console log練習</h3>
+                            <p class="text-muted mb-0">點擊前往觀看主控台輸出與基礎邏輯演練。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 3 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="0923exercise01.html" target="_blank">
+                            <h5>Exercise 01</h5>
+                            <h3>0923exercirse練習</h3>
+                            <p class="text-muted mb-0">點擊前往觀看早期基礎排版與語法練習。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 4 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="0923exercise01-AI.html" target="_blank">
+                            <h5>AI Assisted</h5>
+                            <h3>0923exercirse練習W/ AI</h3>
+                            <p class="text-muted mb-0">點擊前往觀看透過 AI 輔助優化後的練習成果。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 5 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1001 boostrap01.html" target="_blank">
+                            <h5>Bootstrap 5</h5>
+                            <h3>1001 boostrap01</h3>
+                            <p class="text-muted mb-0">點擊前往觀看 Bootstrap 響應式框架網頁設計。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 6 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1006 exercise01me.html" target="_blank">
+                            <h5>Layout Practice</h5>
+                            <h3>1006 exercise01me</h3>
+                            <p class="text-muted mb-0">點擊前往觀看個人化排版與切版練習。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 7 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1008 exercise02me.html" target="_blank">
+                            <h5>Advanced Layout</h5>
+                            <h3>1008 exercise02me</h3>
+                            <p class="text-muted mb-0">點擊前往觀看第二階段切版與樣式微調。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 8 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1013 flex exercise01.html" target="_blank">
+                            <h5>Flexbox</h5>
+                            <h3>1013 flex exercise01</h3>
+                            <p class="text-muted mb-0">點擊前往觀看 Flex 彈性盒模型排版練習。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 9 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1015 CH8 forms.html" target="_blank">
+                            <h5>Forms</h5>
+                            <h3>1015 CH8 forms</h3>
+                            <p class="text-muted mb-0">點擊前往觀看表單設計與輸入控制元件練習。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 10 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1015 CH8 forms EX01.html" target="_blank">
+                            <h5>Forms Exercise</h5>
+                            <h3>1015 CH8 forms EX01</h3>
+                            <p class="text-muted mb-0">點擊前往觀看表單綜合應用演練。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 11 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1027-indexaitry02.html" target="_blank">
+                            <h5>Forms Exercise</h5>
+                            <h3>1027 CH8 forms AI套版</h3>
+                            <p class="text-muted mb-0">點擊前往觀看表單綜合應用演練。</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 項目 12 -->
+                <div class="col-md-6">
+                    <div class="work-card">
+                        <a href="1027-indexaitry01.html" target="_blank">
+                            <h5>Forms Exercise</h5>
+                            <h3>1027 CH8 forms AI套版</h3>
+                            <p class="text-muted mb-0">點擊前往觀看表單綜合應用演練。</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 聯絡與頁尾 -->
+    <footer>
+        <div class="container">
+            <h3 class="fw-bold mb-4">CONTACT & INFO</h3>
+            <p>學習歷程檔案庫 | 互動網頁設計專題</p>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            <p class="mb-0">
+                © 2026 Learning Portfolio | Designed with Bootstrap & Roller Effects
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 與 jQuery Script -->
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-4.0.0.js"></script>
+
 </body>
+
 </html>

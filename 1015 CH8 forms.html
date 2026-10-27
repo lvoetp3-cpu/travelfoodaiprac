@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH8 表單</title>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/myall-css.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="display-2 zm-300 text-center mt-4 text-bg-success p-3">CH8.Form(表單)</div>
+
+        <div class="display-5 zm-300 mt-3 text-primary p-3">1.基本表單格式</div>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="mt-3">
+                    <label for="username" class="form-label">帳號</label>
+                    <input type="text" class="form-control" id="username" placeholder="請輸入帳號">
+                </div>
+
+                <!-- 1. 修正：改用正確的 type="password"，並移除多餘的結尾標籤 -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">密碼</label>
+                    <input type="password" class="form-control" id="password" placeholder="請輸入密碼">
+                </div>
+
+                <!-- 1. 修正：改用正確的 type="email"，並移除多餘的結尾標籤 -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control form-control-lg" id="email" placeholder="name@example.com">
+                </div>
+
+                <!-- 2. 修正：將初始預設值由 1 改為符合範圍的 8 -->
+                <div class="mb-3">
+                    <label for="num" class="form-label">人數</label>
+                    <input type="number" class="form-control form-control-lg" id="num" min="8" max="10" value="8">
+                </div>
+
+                <div class="mb-3">
+                    <label for="formfile" class="form-label">檔案</label>
+                    <input type="file" class="form-control form-control-lg" id="formfile">
+                </div>
+
+                <!-- 優化：為點餐推薦補上正確的 id 連動與間距 -->
+                <div class="mb-3">
+                    <label class="form-label" for="foodRecommend">點餐推薦</label>
+                    <input type="text" class="form-control" id="foodRecommend" list="datalistOption"
+                        placeholder="請輸入或選擇...">
+                    <datalist id="datalistOption">
+                        <option value="漢堡">
+                        <option value="拉麵">
+                        <option value="壽司">
+                        <option value="牛肉麵">
+                    </datalist>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-5 zm-300 mt-5 text-bg-dark p-0">2.Select</div>
+        <div class="row justify-content-center text-center">
+            <div class="col-12 col-md-4">
+                <!-- 優化：加上 d-block 與 id 連動，確保上下層徹底分開 -->
+                <label for="citySelect" class="form-label d-block w-100 mb-2">請選擇縣市</label>
+                <!-- 3. 修正：補上 form-select 基礎類別，並對齊 id -->
+                <select name="city" id="citySelect" class="form-select form-select-lg">
+                    <option value="" disabled selected>...請選擇縣市</option>
+                    <option value="臺中市">臺中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="臺南縣">臺南縣</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="display-5 zm-600 mt-3 text-bg-primary p-3">3.checkbox(複選)。radio(單選)</div>
+        <div class="row">
+            <hr class="">
+            <div class="col-12">
+                <!-- Checkbox 區塊 -->
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" name="mychk" id="chk01">
+                    <label for="chk01" class="form-check-label">選項01</label>
+                </div>
+                <!-- 4. 修正：將後續選項的 for 分別指向各自對應的 id -->
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" name="mychk" id="chk02">
+                    <label for="chk02" class="form-check-label">選項02</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" name="mychk" id="chk03">
+                    <label for="chk03" class="form-check-label">選項03</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" name="mychk" id="chk04">
+                    <label for="chk04" class="form-check-label">選項04</label>
+                </div>
+
+                <hr> <!-- 分隔線 -->
+
+                <!-- Radio 區塊 -->
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="myradio" id="rad01">
+                    <label for="rad01" class="form-check-label">選項01</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="myradio" id="rad02">
+                    <label for="rad02" class="form-check-label">選項02</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="myradio" id="rad03">
+                    <label for="rad03" class="form-check-label">選項03</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="myradio" id="rad04">
+                    <label for="rad04" class="form-check-label">選項04</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-5 zm-300 mt-3 text-primary p-3">4.Switch</div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-check form-switch">
+                    <input type="checkbox" class="form-check-imput" name="id=">
+                    <label for="" class="form-check-label">開燈/關燈</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-5 zm-300 mt-3 text-primary p-3">5.range</div>
+        <div class="mb-3">
+            <label for="" class="form-label">數量:99個</label>
+            <input type="range" class="form-range" min="1" max="100" step="10" value="100">
+
+        </div>
+
+        <div class="display-5 zm-400 mt-3 text-primary p-3">6.input-group</div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <span class="input-group-text">帳號</span>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-text">@gami.com</span>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="1" max="1000" step="1" value="100" class="form-input">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <input type="text" class="form-control form-control-lg" name="" id="">
+                    <button class="btn btn-primary">搜尋</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-5 fw-900 mt-3 text-primary p-3">7. Floating Labels(浮動標籤)</div>
+        <div class="row">
+            <div class="col-12">
+                <!-- 1. 確保 mb-3 與 form-floating 都好好待在 class 的雙引號內 -->
+                <div class="mb-3 form-floating">
+                    <!-- 2. 關鍵：後面必須手動補上 id="username"，與下方的 for="username" 連動 -->
+                    <input type="text" class="form-control form-control-lg" placeholder="XXXX" id="username">
+                    <!-- 3. 標籤維持在 input 下方 -->
+                    <label for="username" class="form-label">帳號</label>
+                </div>
+
+                <div class="display-5 fw-900 mt-3 text-primary p-3">8.表單驗證</div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">帳號</label>
+                            <input type="text" class="form-control is-valid" id="username" placeholder="請輸入一個大寫英文....">
+                            <div class="valid-feedback">帳號輸入符合規定!</div>
+                            <div class="invalid-feedback">帳號輸入不符合規定!</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">密碼</label>
+                            <input type="password" class="form-control is-valid" id="password">
+                            <div class="valid-feedback">密碼輸入符合規定!</div>
+                            <div class="invalid-feedback">密碼輸入不符合規定!</div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    
+
+    </div> <!-- 5. 修正：移除多餘且未對齊的三個 </div>，僅留最後這一個 container 閉合 -->
+    
+
+
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
