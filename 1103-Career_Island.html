@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>初心者職業島｜3D 多島原型</title>
+<style>
+:root{--card:rgba(255,255,255,.94);--fg:#1d2630;--mut:#5f6b76;--bd:#d5dde3;--ac:#1f6fb5;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:rgba(27,34,42,.94);--fg:#e6ebef;--mut:#9aa6b0;--bd:#2c3640;--ac:#6db3f2;color-scheme:dark}}
+:root[data-theme="dark"]{--card:rgba(27,34,42,.94);--fg:#e6ebef;--mut:#9aa6b0;--bd:#2c3640;--ac:#6db3f2;color-scheme:dark}
+html,body{margin:0;height:100%;overflow:hidden;background:#87beeb;color:var(--fg);font:15px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+#cv{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+button{font:inherit;color:inherit;cursor:pointer}
+#top{position:fixed;left:8px;right:8px;top:0;padding-top:calc(8px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:6px;align-items:flex-start;pointer-events:none}
+.bar{pointer-events:auto;display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd);border-radius:999px;padding:4px 8px;max-width:100%;box-sizing:border-box}
+.bar b{margin:0 6px 0 4px}
+.bar button{border:0;background:none;border-radius:999px;padding:2px 10px}
+.bar button.on{background:var(--ac);color:#fff}
+#clk{font-variant-numeric:tabular-nums;min-width:78px}
+#sl{width:min(40vw,200px);accent-color:var(--ac)}
+#cnt{font-size:13px;color:var(--mut);white-space:nowrap}
+#lbs{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.lb{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;background:#fff;color:#222;border-radius:999px;padding:1px 10px 1px 8px;font-size:13px;font-weight:700;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.28)}
+.lb i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#aab;margin-left:6px}
+.lb.on i{background:#f5b800}
+.tag{display:inline-block;color:#fff;font-size:12px;border-radius:6px;padding:0 7px;margin-left:8px;vertical-align:middle}
+#card{position:fixed;left:0;right:0;bottom:0;max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--bd);border-radius:18px 18px 0 0;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));max-height:55vh;overflow-y:auto;transform:translateY(105%);transition:transform .25s;box-shadow:0 -6px 24px rgba(0,0,0,.22)}
+#card.open{transform:none}
+#card .x{position:absolute;right:10px;top:8px;border:0;background:none;font-size:26px;line-height:1;color:var(--mut)}
+.hd{display:flex;align-items:center;gap:12px}.em{font-size:34px}.hd b{font-size:19px}
+.st{margin:6px 0;color:var(--ac)}
+#card h4{margin:12px 0 2px;font-size:14px;color:var(--mut)}
+#card p,#card ul{margin:0}#card ul{padding:0;list-style:none}
+#card li b{font-variant-numeric:tabular-nums;margin-right:6px}
+.ch{display:flex;gap:6px;flex-wrap:wrap}
+.ch button{border:1px solid var(--bd);background:none;border-radius:10px;padding:2px 10px;text-align:left;font-size:13px}
+.il{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;background:rgba(20,30,45,.82);color:#fff;border-radius:10px;padding:2px 12px;font-size:15px;font-weight:700;white-space:nowrap}
+body{user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}.lb.s span{display:none}.lb.s{padding:3px 6px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:6px 14px;pointer-events:auto}
+#brand b{display:block;color:var(--ac);letter-spacing:.08em;line-height:1.35}#brand small{color:var(--mut);font-size:12px}
+#tools{position:fixed;left:8px;top:calc(env(safe-area-inset-top,0px) + 112px);z-index:2;flex-wrap:wrap}
+#side{position:fixed;right:8px;top:calc(env(safe-area-inset-top,0px) + 156px);width:min(280px,calc(100vw - 16px));max-height:46vh;overflow-y:auto;display:none;z-index:4;padding:10px;box-sizing:border-box}
+#side.open{display:block}#side h3{margin:0 0 6px;font-size:14px;color:var(--ac)}#side h4{margin:8px 0 4px;font-size:12px;color:var(--mut)}
+#side .it{display:flex;align-items:center;gap:8px;width:100%;border:0;background:rgba(127,127,127,.14);border-radius:8px;padding:5px 8px;margin-bottom:4px;text-align:left;font-size:14px}
+#side .it.on{outline:2px solid var(--ac)}#side .it i{font-style:normal;color:var(--mut);font-size:12px}#side .it small{margin-left:auto;color:var(--mut)}
+#side .sub{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 6px 8px}#side .sub button{border:1px solid var(--bd);background:none;border-radius:8px;padding:1px 8px;font-size:12px}
+#welcome{position:fixed;left:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));width:min(340px,calc(100vw - 16px));padding:10px 30px 10px 14px;z-index:3;box-sizing:border-box}
+#welcome b{color:var(--ac)}#welcome small{display:block;color:#e0566f;margin:2px 0 4px}#welcome p{margin:0;font-size:13px;color:var(--mut)}
+#welcome .wx{position:absolute;right:8px;top:4px;border:0;background:none;font-size:20px;color:var(--mut)}
+#card{z-index:6}
+@media (min-width:900px){#tools{left:auto;right:8px;top:calc(env(safe-area-inset-top,0px) + 8px)}#side{display:block;top:calc(env(safe-area-inset-top,0px) + 58px)}#bS{display:none}}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0}#cv{z-index:1}#lbs{z-index:2}#top{z-index:3}
+@media (prefers-reduced-motion:reduce){#card{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<canvas id="cv"></canvas>
+<div id="lbs"></div>
+<div id="top">
+<div class="card" id="brand"><b>初心者職業島CAREER ISLAND</b><small>｜國高中職業探索平台｜</small></div>
+<div class="bar"><button id="pp" aria-label="暫停或播放">⏸</button><span id="clk"></span><input id="sl" type="range" min="0" max="1439" value="420" aria-label="時間"><span id="cnt"></span></div>
+</div>
+<div id="tools" class="bar"><button id="bV">全景</button><button id="bT">鳥瞰</button><button id="bL">協作線</button><button id="bN">日夜切換</button><button id="bS">島嶼清單</button></div>
+<div id="side" class="card"><h3>探索主題島嶼</h3><div id="ilist"></div></div>
+<div id="welcome" class="card"><button class="wx" aria-label="關閉">×</button><b>☀ 歡迎來到職業島</b><small>點擊島嶼或清單，認識各行各業</small><p>點擊畫面中的 3D 建築或右側清單，看看每個職業的一天、需要的能力，還有國高中生現在可以怎麼接觸。拖動時間軸，看看一天裡誰在工作。電腦上可按住滑鼠中鍵或右鍵拖曳平移，滾輪縮放。</p></div>
+<div id="card" role="dialog" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const D=["農業餐飲","交通物流","醫療","資訊","工業","民生","漁業"],C=["#c2571a","#1f6fb5","#b83a56","#6a4bc4","#4f6d8a","#218062","#0f8a8a"];
+/* 名稱, 圖示, 領域, 上班, 下班, 一天, 能力, 辛苦, 接觸方式 */
+const J=[
+["農夫","🧑‍🌾",0,5,13,[["05:00","巡田、採收"],["09:00","分裝，聯絡買家"],["13:00","整理資材，看天氣與病蟲害"]],["觀察力","體力","估算成本"],"收入看天氣與市價，颱風一來就可能白忙一場。","農業相關科系、農校或農業推廣活動可以先接觸；假日也能去農場體驗。"],
+["貨運司機","🚚",1,4,13,[["04:00","裝貨、對單"],["08:00","跑配送路線"],["12:00","回報、卸貨、整理單據"]],["路線規劃","責任感","專業駕照"],"時間被塞車和客戶時段綁住，也得長時間坐在車上。","駕照要成年後才能考；可以先了解物流、運輸相關科系。"],
+["麵包師傅","🥖",0,3,11,[["03:00","揉麵、發酵"],["06:00","烘烤出爐、上架"],["10:00","備隔天的料、清潔"]],["耐心","體力","配方要精準"],"作息顛倒，要站很久，廚房又熱。","餐飲或烘焙相關科系是常見路線；也可以先到烘焙坊打工，看適不適合。"],
+["餐廳廚師","👨‍🍳",0,10,21,[["10:00","備料、開火"],["12:00","午餐高峰"],["17:00","晚餐備料與出餐"]],["手腳俐落","抗壓","團隊默契"],"尖峰時段很趕，週末和假日通常最忙。","餐飲相關科系和證照；先從外場或洗碗打工，認識廚房的節奏。"],
+["夜市攤商","🏮",0,16,24,[["14:00","採買、備料"],["17:00","開攤"],["24:00","收攤、清洗、算帳"]],["招呼客人","算成本","臨場反應"],"自己當老闆，賣不出去就是自己的損失；下雨天生意常受影響。","可以先到攤位幫忙一天，看真正的流程；學習成本與定價的概念很有用。"],
+["計程車司機","🚕",1,12,24,[["12:00","出車、找客人"],["18:00","尖峰載客"],["23:00","夜間載客、收車"]],["熟悉路況","與人相處","安全意識"],"收入不固定，長時間坐著，作息也容易亂。","需取得職業駕照等資格（成年後）；平常多練習認路與服務態度。"],
+["工廠技師","🔧",3,8,17,[["08:00","檢查機台"],["11:00","維修、調整"],["15:00","記錄、改善流程"]],["動手能力","邏輯","安全習慣"],"設備出問題要立刻處理，現場有噪音和安全風險。","機械、電機等科系或高職技能訓練是常見路線；可以關注技能競賽。"],
+["軟體工程師","💻",3,10,19,[["10:00","看需求、開會討論"],["13:00","寫程式、測試"],["17:00","修問題、更新系統"]],["邏輯思考","自學能力","溝通"],"需求常常改，要持續學新東西，久坐也會影響健康。","資訊相關科系是一條路，自學和作品也很重要；可以從小專案開始練習。"],
+["清潔隊員","🧹",4,17,23,[["17:00","集合、出勤"],["18:00","垃圾車與資源回收路線"],["22:00","回隊整理、清洗車輛"]],["體力","守時","團隊合作"],"各種天氣都要出勤，氣味與安全風險是日常。","進入管道與規定各縣市不同，正式版會補上資料來源。"],
+["藥師","💊",2,8,20,[["08:00","看處方、備藥"],["12:00","與醫師、病人溝通用藥"],["17:00","核對庫存、整理藥品"]],["細心","理化與生物基礎","說明清楚"],"一個小錯誤可能影響病人安全，所以要反覆核對。","需要藥學系與國家考試；理化和生物打好基礎很有幫助。"],
+["護理師","🩺",2,16,24,[["16:00","交班、了解病人狀況"],["20:00","量測、給藥、記錄"],["23:30","處理突發狀況，交班給大夜班"]],["細心","同理心","抗壓"],"要輪班（白班、小夜、大夜），也要為病人的狀況負責。","護理相關科系與國家考試；可以先參加醫院的職業體驗或志工。"],
+["國中老師","🍎",4,7.5,16.5,[["07:30","早自習、班級事務"],["10:00","上課"],["15:00","批改、備課、聯絡家長"]],["表達","耐心","對學科有熱情"],"除了教書，還有班級經營、行政和家長溝通。","需修教育學程並通過教師資格與甄試；可從家教或志工開始接觸。"],
+["漁船船員","🎣",6,3,13,[["03:00","檢查船、油料與漁具"],["05:00","出海作業，撒網或下鉤"],["11:00","返港、分類漁獲、交貨"]],["體力","團隊合作","判斷天氣與海況"],"天氣和海況決定能不能出海，收入不固定，作息顛倒，海上作業也有安全風險。","可以關注水產、海事相關的高職與大學科系；有機會到漁港參觀，了解漁獲從船上到餐桌的流程。"]
+];
+/* 來源, 去向, 幾點出發, 圖示, 內容 */
+const L=[[0,3,7,"🥬","蔬菜食材"],[0,4,14,"🥬","蔬果"],[1,2,5,"🌾","麵粉"],[1,3,9,"📦","食材"],[6,1,8.5,"⚙️","零件成品"],[7,6,11,"💾","排程系統"],[9,10,17,"💊","藥品"],[5,4,19,"👥","載客人去逛夜市"],[8,4,22,"🧹","夜市垃圾清運"],[12,3,12.5,"🐟","新鮮漁獲"],[12,4,13,"🐟","海鮮"]];
+const BW=86,BH=60,DUR=130,VX=[121.5,238.5],HY=379;
+const X=i=>20+(i%3)*117,Y=i=>20+Math.floor(i/3)*94,door=i=>[X(i)+43,Y(i)+BH+17],hx=i=>28+i*27;
+const $=s=>document.querySelector(s),WX=v=>(v-180)*.1,WZ=v=>(v-223)*.1,cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fh=x=>Math.floor(x)+":"+(x%1?"30":"00");
+const fmt=t=>String(Math.floor(t/60)%24).padStart(2,"0")+":"+String(Math.floor(t%60)).padStart(2,"0");
+function route(a,b){if(a[1]===b[1])return[a,b];const v=VX.reduce((p,q)=>Math.abs(q-a[0])+Math.abs(q-b[0])<Math.abs(p-a[0])+Math.abs(p-b[0])?q:p);return[a,[v,a[1]],[v,b[1]],b]}
+function pos(p,f){const n=[0];for(let i=1;i<p.length;i++)n[i]=n[i-1]+Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]);const d=f*n[n.length-1];let i=1;while(i<n.length-1&&n[i]<d)i++;const u=(d-n[i-1])/(n[i]-n[i-1]||1);return[p[i-1][0]+(p[i][0]-p[i-1][0])*u,p[i-1][1]+(p[i][1]-p[i-1][1])*u,(p[i-1][2]||0)+((p[i][2]||0)-(p[i-1][2]||0))*u]}
+function ph(s,e,t){const L2=(e-s+1440)%1440,tt=(t-(s-DUR)+2880)%1440;if(tt<DUR)return["go",tt/DUR];if(tt<DUR+L2)return["work",1];if(tt<2*DUR+L2)return["back",(tt-DUR-L2)/DUR];return["home",0]}
+/* ---- 場景 ---- */
+const DM=[0,1,0,0,0,1,4,3,5,2,2,5,6];J.forEach((j,i)=>j[2]=DM[i]);
+const cv=$("#cv"),R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(42,1,1,1200);
+const hemi=new THREE.HemisphereLight(0xffffff,0x6a7a88,1),sun=new THREE.DirectionalLight(0xfff2d8,1);sun.position.set(55,100,40);sun.castShadow=true;sun.shadow.mapSize.set(innerWidth<700?1024:2048,innerWidth<700?1024:2048);{const q=sun.shadow.camera;q.left=q.bottom=-115;q.right=q.top=115;q.near=10;q.far=320}sun.shadow.bias=-.0005;S.add(hemi,sun);
+const BX=(w,h,d)=>new THREE.BoxGeometry(w,h,d),CY=(a,b,h,s=18)=>new THREE.CylinderGeometry(a,b,h,s);
+const mk=(g,c,x,y,z,p=S,sx=1,sz=1)=>{const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({color:c,flatShading:true}));m.position.set(x,y,z);m.scale.set(sx,1,sz);m.castShadow=m.receiveShadow=true;p.add(m);return m};
+const sea=mk(CY(115,111,4,72),0x2f77c8,0,-3,35);sea.castShadow=false;
+const FOAM=[];
+const blob=(g,ph)=>{const p=g.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getZ(i),a=Math.atan2(z,x),k=1+.08*Math.sin(3*a+ph)+.05*Math.sin(5*a+ph*2);p.setX(i,x*k);p.setZ(i,z*k)}g.computeVertexNormals();return g};
+const isle=(x,z,r,tint,E=0)=>{const ph=(x*.37+z*.73)%6.28,B2=(a,b,h,n=24)=>blob(CY(a,b,h,n),ph);
+ mk(B2(1,.96,1.6),tint,x,E-.8,z,S,r,r);mk(B2(.9,.9,.1),0x8fd16a,x,E-.01,z,S,r,r);mk(B2(.96,.8,1.6),0xb07a55,x,E-2.4,z,S,r,r);if(E>=12){const ch=3+r*.5;mk(B2(.8,.05,ch),0x7a4f3a,x,E-3.2-ch/2,z,S,r,r);return}mk(B2(.8,.6,1.8+E),0x7a4f3a,x,E-3.2-(1.8+E)/2,z,S,r,r);mk(B2(1.07,1.07,.3),0x8fd0e6,x,-1.05,z,S,r,r);
+ const f=new THREE.Mesh(blob(CY(1,1,.05,40),ph),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.3}));f.position.set(x,-.92,z);f.scale.set(r*1.2,1,r*1.2);S.add(f);FOAM.push([f,r])};
+const arch=(p,q,rp,rq,A=2.4)=>{const dx=q[0]-p[0],dz=q[1]-p[1],d=Math.hypot(dx,dz),ux=dx/d,uz=dz/d,a=[p[0]+ux*rp*.9,p[1]+uz*rp*.9,p[2]],b=[q[0]-ux*rq*.9,q[1]-uz*rq*.9,q[2]],P=[];
+ for(let i=0;i<=8;i++){const u=i/8;P.push([a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u,a[2]+(b[2]-a[2])*u+A*4*u*(1-u)+.1])}
+ for(let i=0;i<8;i++){const m=mk(BX(2.4,.3,Math.hypot(P[i+1][0]-P[i][0],P[i+1][1]-P[i][1],P[i+1][2]-P[i][2])+.15),0xc9a06b,(P[i][0]+P[i+1][0])/2,(P[i][2]+P[i+1][2])/2-.1,(P[i][1]+P[i+1][1])/2);m.lookAt(P[i+1][0],P[i+1][2]-.1,P[i+1][1])}
+ const md=P[4];if(md[2]<10)mk(CY(.4,.55,md[2]+3,6),0x8d7a63,md[0],(md[2]-3)/2,md[1]);return P};
+const road=(a,b,w=1.3)=>{const dx=b[0]-a[0],dz=b[1]-a[1],o=mk(BX(Math.hypot(dx,dz),.1,w),0xb9b1a0,(a[0]+b[0])/2,.06+(a[2]||0),(a[1]+b[1])/2);o.rotation.y=-Math.atan2(dz,dx)};
+const G=[[0,2,3,4],[1,5],[9,10],[7],[6],[8,11],[12]],RR=[14,11,11,9,9,11,9],RO=[7.5,5.5,5.5,3.5,3.5,5.5,3.5],RING=50,ELV=[20,28,22,32,26,30,4],HE=24;
+const NM=["🌾 農業餐飲島","🚚 交通物流島","🏥 醫療島","💻 資訊島","🏭 工業島","🏫 民生島","🎣 漁業島","🎒 國中","🏫 高中職・專科","🎓 大學以上"];
+const SZ=[[5,2.6,4],[6.2,2.4,4.4],[4.6,2.4,4],[5.4,2.6,4.2],[5.6,1.2,3],[4,2.2,3.6],[5.8,2.4,4.4],[3.6,5.4,3.6],[4.8,2.2,3.8],[4.4,2.4,3.6],[5.6,3.6,4.2],[6,2.4,3.6],[5.6,2.4,4]],LH=[5,4,4.2,4.2,3.4,3.4,5,8.8,3.4,3.6,5.2,5.6,4.6];
+const gb=(w,d,rh,c,x,y,p)=>{const s=new THREE.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(0,rh);const g=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:false});g.translate(0,0,-d/2);return mk(g,c,x,y,0,p)};
+const EX=[
+(b,g,c)=>{g(5.4,4.2,1.6,0x7a2e22,0,2.6);c(.9,4.2,0xd9dde0,3.7,0,-.6)},
+(b,g,c)=>{b(6.6,.3,4.8,0x777777,0,2.4,0);[-1.9,0,1.9].forEach(x=>b(1.5,1.5,.1,0x44505a,x,0,2.25));b(2.2,1.3,1.2,0xeeeeee,3.9,.2,3.6);b(1,1,1.2,0x1f6fb5,2.5,.2,3.6)},
+(b,g,c)=>{g(5,4.2,1.3,0xb5543a,0,2.4);c(.3,1.6,0x888888,1.4,2.4,-1);[-1.4,0,1.4].forEach((x,k)=>b(1.3,.15,1.2,k%2?0xffffff:0xdd3333,x,1.7,2.5))},
+(b,g,c)=>{b(5.8,.3,4.6,0x555555,0,2.6,0);b(3,.8,.3,0xffd56b,0,2.9,2.1);b(5,.15,1.2,0x333333,0,1.8,2.7)},
+(b,g,c,p)=>{[-1.9,0,1.9].forEach((x,k)=>{const o=mk(new THREE.ConeGeometry(1.3,1,4),[0xff5c5c,0xffd23f,0x4cc9f0][k],x,1.7,.4,p);o.rotation.y=Math.PI/4})},
+(b,g,c)=>{b(4.4,.3,4,0x555555,0,2.2,0);[-2.8,2.8].forEach(x=>{b(1.3,.5,.7,0xf5c518,x,.15,3.6);b(.8,.4,.6,0xf5c518,x,.65,3.6)})},
+(b,g,c)=>{[-1.9,0,1.9].forEach(x=>g(1.9,4.4,.9,0x6b7b8c,x,2.4));c(.4,3.2,0x8b8f94,2.2,2.4,-1.4);c(.4,2.6,0x8b8f94,1,2.4,-1.4)},
+(b,g,c)=>{b(2.4,1.8,2.4,0x8a6ee6,0,5.4,0);c(.08,1.6,0xdddddd,0,7.2,0)},
+(b,g,c)=>{b(5.2,.3,4.2,0x555555,0,2.2,0);b(2.2,1.2,1.1,0x2e9b6f,3.3,.2,3.3);b(.9,.9,1.1,0xdddddd,1.9,.2,3.3)},
+(b,g,c)=>{b(4.8,.3,4,0x555555,0,2.4,0);b(.4,1.4,.2,0x2ecc71,0,2.7,1.5);b(1.4,.4,.2,0x2ecc71,0,3.2,1.5)},
+(b,g,c)=>{b(.5,1.8,.15,0xffffff,0,1.5,2.15);b(1.8,.5,.15,0xffffff,0,2.15,2.15);b(2.2,.15,2.2,0x555555,0,3.6,0)},
+(b,g,c)=>{b(1.6,4.2,1.6,0xe9e0c8,0,0,-.6);c(.06,2.6,0x999999,2.7,0,2.6);b(.9,.5,.05,0xff3b3b,3.15,2.1,2.6)},
+(b,g,c)=>{g(5.4,4,1.4,0x3d6e8a,0,2.4);c(.7,4.2,0xffffff,3.4,0,-.6);c(.72,.8,0xe03a3a,3.4,1.2,-.6);c(.72,.8,0xe03a3a,3.4,3,-.6);b(1,.7,1,0xc9a06b,-2.6,0,3);b(.9,.6,.9,0xb98a55,-2.4,.7,3.1)}];
+const isl=[],cen=[],he=[],th=[],dr=[],dpt=[],B=[],BR=[];
+mk(CY(1,.96,1.6),0xffffff,0,0,0).visible=false;isle(0,0,9,0xe9d7b5,HE);mk(CY(1.6,1.6,.12,16),0xd9d2c0,0,.07+HE,0);
+G.forEach((g,k)=>{const a=(120+k*50)*Math.PI/180,c=Math.cos(a),s=Math.sin(a);th[k]=a;dr[k]=[c,s];cen[k]=[c*RING,s*RING,ELV[k]];he[k]=[c*8.2,s*8.2,HE];
+ isle(cen[k][0],cen[k][1],RR[k],new THREE.Color(C[k]).lerp(new THREE.Color(0xffffff),.6),ELV[k]);mk(CY(1.6,1.6,.12,16),0xd9d2c0,cen[k][0],.07+ELV[k],cen[k][1]);
+ BR[k]=arch([0,0,HE],cen[k],9,RR[k]);
+ g.forEach((i,m)=>{const n=g.length,f=th[k]+(n===1?0:(m+.5)*2*Math.PI/n),bx=cen[k][0]+RO[k]*Math.cos(f),bz=cen[k][1]+RO[k]*Math.sin(f),[w,h,d]=SZ[i],dd=d*.625+.8;
+  const grp=new THREE.Group();grp.position.set(bx,ELV[k],bz);grp.rotation.y=Math.atan2(-Math.cos(f),-Math.sin(f));grp.scale.setScalar(1.25);S.add(grp);
+  const base=new THREE.Color(C[J[i][2]]),mt=new THREE.MeshLambertMaterial({color:base,emissive:base,emissiveIntensity:0}),wm=new THREE.MeshLambertMaterial({color:0xcfe6f2,emissive:0xffd56b,emissiveIntensity:0});
+  const main=new THREE.Mesh(BX(w,h,d),mt);main.position.y=h/2;main.userData.i=i;grp.add(main);
+  const b=(w2,h2,d2,c,x,y,z)=>{const o=mk(BX(w2,h2,d2),c,x,y+h2/2,z,grp);o.userData.i=i;return o};
+  const gg=(w2,d2,rh,c,x,y)=>{gb(w2,d2,rh,c,x,y,grp).userData.i=i},cc=(r,h2,c,x,y,z)=>{mk(CY(r,r,h2,10),c,x,y+h2/2,z,grp).userData.i=i};
+  [-1,1].forEach(q=>{const o=new THREE.Mesh(BX(.9,.8,.1),wm);o.position.set(q*w*.28,h*.6,d/2+.05);grp.add(o)});b(1.1,1.4,.2,0xf6e7bd,0,0,d/2+.05);
+  EX[i](b,gg,cc,grp);
+  isl[i]=k;dpt[i]=[bx-dd*Math.cos(f),bz-dd*Math.sin(f),ELV[k]];road(cen[k],dpt[i]);B[i]={x:bx,y:ELV[k],z:bz,m:mt,base,w:wm}})});
+const SGN=["國中","高中職・專科","大學以上"],SGE=["🎒","🏫","🎓"],SGC=[0xf0b84a,0x4fa3e0,0x9b6bd6],SR=[22,10,7.5],SC=[[0,78,1],[0,63,4.5],[0,49,8]],BP=[[-8,84],[-3.5,66],[-3,50]],SGM=[],AC=cen.concat(SC),hlJ=new Set(),hlS=new Set();
+const JP=[[1,2],[1],[1],[1,2],[1],[1],[1,2],[1,2],[1],[2],[1,2],[2],[1,2]];
+const stairs=(x,z1,z2,e1,e2,n=7,w=3)=>{const P=[];for(let i=0;i<n;i++){const zc=z1+(z2-z1)*(i+.5)/n,top=e1+(e2-e1)*(i+1)/n,h=top-e1+2;mk(BX(w,h,Math.abs(z2-z1)/n+.05),i%2?0xe6dfcf:0xd3cbb8,x,e1-2+h/2,zc);P.push([x,zc,top+.02])}return P};
+SC.forEach((c,q)=>{isle(c[0],c[1],SR[q],new THREE.Color(SGC[q]).lerp(new THREE.Color(0xffffff),.6),c[2]);
+ const m=new THREE.MeshLambertMaterial({color:SGC[q],emissive:SGC[q],emissiveIntensity:0}),g=new THREE.Group();SGM[q]=m;g.position.set(BP[q][0],c[2],BP[q][1]);S.add(g);
+ const sb=(w,h,d,col,x,y,z,mat)=>{const o=mat?new THREE.Mesh(BX(w,h,d),mat):mk(BX(w,h,d),col,0,0,0,g);if(mat)g.add(o);o.position.set(x,y+h/2,z);o.userData.st=q;o.castShadow=o.receiveShadow=true;return o};
+ const h=[2.4,3.2,3.4][q];sb(4.2,h,3.2,0,0,0,0,m);sb(4.6,.3,3.6,0x555555,0,h,0);sb(2.4,.6,.2,0xffffff,0,1.2,1.65);
+ if(q===0){sb(.1,2.6,.1,0x999999,1.9,h,1.4);sb(.9,.5,.05,0xff3b3b,2.35,h+2.1,1.4)}
+ if(q===1){sb(.5,1.6,.5,0x888888,-1.2,h+.3,-.8);sb(.5,1.2,.5,0x888888,-.2,h+.3,-.8)}
+ if(q===2){const d2=mk(new THREE.SphereGeometry(1.3,10,6,0,6.283,0,1.57),0xd9d2c0,0,h+.3,0,g);d2.userData.st=q;[-1.6,1.6].forEach(x=>sb(.35,h,.35,0xf2eee0,x,0,1.9))}});
+const ST1=stairs(5,77,71,1,4.5),ST2=stairs(5,60,54.5,4.5,8),A3=arch(SC[2],[0,0,HE],SR[2],9,1);
+const hs=[];for(let h=0;h<12;h++){const a=h*Math.PI/6+.26,c=Math.cos(a),s=Math.sin(a);mk(BX(1.5,1.1,1.2),0xf2d6a2,6.6*c,.6+HE,6.6*s);mk(BX(1.7,.3,1.4),0xb5543a,6.6*c,1.3+HE,6.6*s);hs[h]=[5.2*c,5.2*s,HE]}
+let sd=7;const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
+const tp=[];G.forEach((g,k)=>{for(let t=0;t<Math.round(RR[k]*1.3);t++){const a=th[k]+Math.PI+(rnd()-.5)*0+rnd()*6.283,q=th[k]+Math.PI;if(Math.abs(Math.atan2(Math.sin(a-q),Math.cos(a-q)))<.45)continue;const r=RR[k]*(.7+rnd()*.07);tp.push([cen[k][0]+Math.cos(a)*r,cen[k][1]+Math.sin(a)*r,.7+rnd()*.7,ELV[k]])}});
+const IM=(g,arr,fn)=>{const m=new THREE.InstancedMesh(g,new THREE.MeshLambertMaterial({color:0xffffff,flatShading:true}),arr.length),o=new THREE.Object3D(),c=new THREE.Color();arr.forEach((p,n)=>{o.position.set(p[0],p[3]||0,p[1]);o.scale.setScalar(p[2]);o.updateMatrix();m.setMatrixAt(n,o.matrix);m.setColorAt(n,fn(c))});m.castShadow=m.receiveShadow=true;S.add(m)};
+const grn=c=>c.setHSL(.27+rnd()*.08,.55,.34+rnd()*.12),T1=tp.filter((p,n)=>n%2),T2=tp.filter((p,n)=>!(n%2));
+IM(BX(.45,1.4,.45).translate(0,.7,0),tp,c=>c.set(0x7a5236));IM(BX(1.9,1.5,1.9).translate(0,2.2,0),T1,grn);IM(BX(1.5,1.2,1.5).translate(0,2.1,0),T2,grn);IM(BX(.9,.8,.9).translate(0,3,0),T2,grn);
+const fl=[];G.forEach((g,k)=>{for(let t=0;t<Math.round(RR[k]*1.6);t++){const a=rnd()*6.283,q=th[k]+Math.PI;if(Math.abs(Math.atan2(Math.sin(a-q),Math.cos(a-q)))<.45)continue;const r=RR[k]*(.7+rnd()*.07);fl.push([cen[k][0]+Math.cos(a)*r,cen[k][1]+Math.sin(a)*r,.7+rnd()*.7,ELV[k]])}});
+IM(BX(.4,.4,.4).translate(0,.2,0),fl,c=>c.set([0xff7aa8,0xffd23f,0xffffff,0xff9f43][Math.floor(rnd()*4)]));
+const BT=[];for(let n=0;n<4;n++){const g=new THREE.Group();mk(BX(2.6,.6,1.1),[0xffffff,0xff5c5c,0xffd23f,0xffffff][n],0,-.7,0,g);mk(CY(.06,.06,2.4,5),0x888888,0,.6,0,g);const sh=new THREE.Shape();sh.moveTo(0,0);sh.lineTo(1.4,0);sh.lineTo(0,2.2);mk(new THREE.ExtrudeGeometry(sh,{depth:.05,bevelEnabled:false}),0xffffff,-.1,-.2,0,g);S.add(g);BT.push(g)}
+const CLM=new THREE.MeshLambertMaterial({color:0xffffff,transparent:true,opacity:.92}),CL=[];
+for(let n=0;n<10;n++){const g=new THREE.Group();[[0,0,0,5],[4,-.4,1,4],[-4.5,-.6,-1,3.6]].forEach(q=>{const m=new THREE.Mesh(BX(q[3]*2,q[3]*.7,q[3]*1.4),CLM);m.position.set(q[0],q[1],q[2]);g.add(m)});g.userData={a:n<5,off:rnd()*260,sp:1+rnd()*.8,fx:(n%2?1:-1)*(66+rnd()*34),fz:-80-rnd()*30};g.position.y=40+rnd()*14;S.add(g);CL.push(g)}
+const FB=[0,1,2].map(n=>{const k=6,d=dr[k],p=[-d[1],d[0]],r1=RR[k]*1.25,o=(n-1)*12,dk=[cen[k][0]+d[0]*r1+p[0]*o*.35,cen[k][1]+d[1]*r1+p[1]*o*.35,0],gr=[cen[k][0]+d[0]*(r1+45)+p[0]*o,cen[k][1]+d[1]*(r1+45)+p[1]*o,0],g=new THREE.Group();
+ mk(BX(1.4,.7,3.4),[0x2b6cb0,0xc0392b,0x2e9b6f][n],0,-.7,0,g);mk(BX(1,1,1),0xffffff,0,0,-.9,g);mk(CY(.06,.06,2.2,5),0x888888,0,.8,.7,g);mk(BX(.9,.5,.04),0xf4c20d,.5,1.5,.7,g);S.add(g);
+ return{g,path:[dk,gr],s:(5+n*.75)*60,e:(10+n*.75)*60,hd:Math.atan2(gr[0]-dk[0],gr[1]-dk[1])}});
+/* ---- 小人 ---- */
+const pal=[0xe74c3c,0x3498db,0xf1c40f,0x9b59b6,0x1abc9c,0xe67e22,0xecf0f1,0x2ecc71],mkP=(h,i)=>[hs[h],...BR[isl[i]],cen[isl[i]],dpt[i]];
+const PP=J.map((j,i)=>({s:j[3]*60,e:j[4]*60,col:C[j[2]],path:mkP(i%12,i)})),K=[2,0,6,6,14,3,0,0,0,5,3,16,2];
+J.forEach((j,i)=>{for(let c=0;c<K[i];c++){const sp=(j[4]-j[3])*60,s=j[3]*60+(c+1)/(K[i]+1)*(sp-130)+rnd()*20;PP.push({s,e:s+40+rnd()*50,col:pal[Math.floor(rnd()*8)],path:mkP(Math.floor(rnd()*12),i)})}});
+for(let n=0;n<10;n++){const i=n%12,k=isl[i];PP.push({s:0,e:0,a:n*144,col:0xffffff,path:[[5,90,1],[5,77,1],...ST1,[5,66,4.5],[5,60,4.5],...ST2,[5,50,8],...A3,he[k],...BR[k],cen[k],dpt[i]]})}
+const skin=[0xf1c7a0,0xe0ac80,0xc68a62,0xf7d8b8],R4=new THREE.Matrix4(),M1=new THREE.Matrix4(),M2=new THREE.Matrix4(),qt=new THREE.Quaternion(),v4=new THREE.Vector3(),UY=new THREE.Vector3(0,1,0);
+PP[9].col=0xffffff;
+const mkI=(w,h,d,fn)=>{const m=new THREE.InstancedMesh(BX(w,h,d),new THREE.MeshLambertMaterial({color:0xffffff}),PP.length);PP.forEach((p,n)=>m.setColorAt(n,new THREE.Color(fn(p,n))));m.castShadow=true;S.add(m);return m};
+const iH=mkI(.5,.5,.5,(p,n)=>skin[n%4]),iB=mkI(.62,.75,.32,p=>p.col),iL=mkI(.28,.65,.28,()=>0x3b4a6b),iR=mkI(.28,.65,.28,()=>0x3b4a6b),iA=mkI(.22,.65,.22,p=>p.col),iA2=mkI(.22,.65,.22,p=>p.col);
+const part=(m,n,px,py,pz,ang,hh)=>{M1.makeTranslation(px,py,pz);if(hh){M2.makeRotationX(ang);M1.multiply(M2);M2.makeTranslation(0,-hh,0);M1.multiply(M2)}M1.premultiply(R4);m.setMatrixAt(n,M1)};
+const hat=(c,y=1.95)=>[[.54,.14,.54,c,0,y,0],[.54,.04,.3,c,0,y-.05,.35]],GL=[.52,.1,.04,0x222222,0,1.7,.27];
+const PR=[[[.95,.08,.95,0xe8c65a,0,1.92,0],[.5,.15,.5,0xe8c65a,0,2.02,0]],[...hat(0x1f6fb5),[.5,.3,.3,0xc9a06b,0,1.0,.45]],[[.52,.5,.52,0xffffff,0,2.15,0]],[[.52,.7,.52,0xffffff,0,2.25,0],[.62,.1,.62,0xffffff,0,1.95,0]],[[.54,.1,.54,0xe03a3a,0,1.78,0]],hat(0xf5c518),[[.58,.2,.58,0xffb000,0,1.98,0],[.64,.04,.64,0xffb000,0,1.9,0],[.12,.12,.4,0x888888,.5,.95,.3]],[GL,[.5,.03,.34,0x888888,0,1.05,.42]],[...hat(0x2e9b6f),[.05,1.5,.05,0x8a5a2b,.6,.75,.1],[.3,.12,.12,0xd8b86a,.6,.1,.1]],[[.3,.08,.04,0x2ecc71,0,1.2,.17],[.08,.3,.04,0x2ecc71,0,1.2,.17]],[[.5,.14,.5,0xffffff,0,1.95,0],[.16,.04,.04,0xe03a3a,0,1.95,.27],[.04,.16,.04,0xe03a3a,0,1.95,.27]],[GL,[.3,.05,.4,0xc0392b,.5,.8,.25]],[[.6,.14,.6,0xf4c20d,0,1.97,0],[.6,.04,.3,0xf4c20d,0,1.92,.35],[.05,1.8,.05,0x8a5a2b,.55,.9,.3],[.04,.04,.8,0x8a5a2b,.55,1.8,.7]]];
+const mkG=sp=>{const g=new THREE.Group();sp.forEach(q=>mk(BX(q[0],q[1],q[2]),q[3],q[4],q[5],q[6],g));g.visible=false;S.add(g);return g};
+PR.forEach((sp,i)=>PP[i].g=mkG(sp));PP.forEach(p=>{if(p.a!==undefined)p.g=mkG([[.4,.5,.2,0xf08a24,0,1.1,-.26]])});
+const LP=L.map(l=>{const a=l[0],b=l[1],ka=isl[a],kb=isl[b];return ka===kb?[dpt[a],cen[ka],dpt[b]]:[dpt[a],cen[ka],...BR[ka].slice().reverse(),...BR[kb],cen[kb],dpt[b]]}),PC=L.map(()=>mk(BX(.7,.7,.7),0xffcf5a,0,1,0)),
+LN=LP.map(p=>{const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints(p.map(q=>new THREE.Vector3(q[0],(q[2]||0)+.3,q[1]))),new THREE.LineDashedMaterial({color:0xffd56b,dashSize:.8,gapSize:.6}));l.computeLineDistances();l.visible=false;S.add(l);return l});
+const lbs=$("#lbs"),mkL=(t,c)=>{const d=document.createElement("div");d.className=c;d.innerHTML=t;lbs.appendChild(d);return d},LB=J.map((j,i)=>{const d=mkL(j[1]+"<span> "+j[0]+"</span><i></i>","lb");d.dataset.i=i;return d}),IL=NM.map((n,k)=>{const d=mkL(n,"il");d.dataset.k=k;return d});
+/* ---- 鏡頭 ---- */
+let az=0,el=.85,dist=170,tA=0,tE=.85,tD=170,d0=170,tX=0,tZ=22,cx0=0,cz0=22,tY=14,cy0=14,T=420,playing=true,linkOn=false,sel=-1,last=performance.now();
+function fit(){const w=innerWidth,h=innerHeight;R.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix();d0=1.5*Math.max(150,66/(.768*Math.min(1,cam.aspect)));tD=dist=d0}
+fit();addEventListener("resize",fit);
+function focus(k){tX=AC[k][0];tZ=AC[k][1];tY=AC[k][2]+2;act=k;renderList();tD=Math.min(tD,d0*.4)}
+const ptr=new Map();let moved=0,pd=0;const pdist=()=>{const a=[...ptr.values()];return a.length<2?0:Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])};
+let pan=false;const panBy=(dx,dy)=>{const k=dist*.768/innerHeight;tX=cl(tX-Math.cos(az)*dx*k-Math.sin(az)*dy*k/Math.sin(el),-140,140);tZ=cl(tZ+Math.sin(az)*dx*k-Math.cos(az)*dy*k/Math.sin(el),-140,160)};cv.oncontextmenu=e=>e.preventDefault();cv.onmousedown=e=>{if(e.button===1)e.preventDefault()};
+cv.onpointerdown=e=>{if(e.button===1)e.preventDefault();pan=e.button===1||e.button===2;cv.setPointerCapture(e.pointerId);ptr.set(e.pointerId,[e.clientX,e.clientY]);moved=0;pd=pdist()};
+cv.onpointermove=e=>{if(!ptr.has(e.pointerId))return;const o=ptr.get(e.pointerId),n=[e.clientX,e.clientY];ptr.set(e.pointerId,n);
+ if(ptr.size===1&&pan){panBy(n[0]-o[0],n[1]-o[1]);moved+=99}else if(ptr.size===1){tA-=(n[0]-o[0])*.006;tE=cl(tE+(n[1]-o[1])*.004,.3,1.5);moved+=Math.abs(n[0]-o[0])+Math.abs(n[1]-o[1])}else{const d=pdist();if(d&&pd)tD=cl(tD*pd/d,d0*.2,d0*1.3);pd=d;panBy((n[0]-o[0])/2,(n[1]-o[1])/2);moved+=99}};
+cv.onpointerup=e=>{if(ptr.size===1&&moved<8)pick(e);ptr.delete(e.pointerId)};cv.onpointercancel=e=>ptr.delete(e.pointerId);
+cv.onwheel=e=>{e.preventDefault();tD=cl(tD*(1+e.deltaY*.001),d0*.2,d0*1.3)};
+const rc=new THREE.Raycaster(),mv=new THREE.Vector2(),ms=[];S.traverse(o=>{if(o.isMesh&&(o.userData.i!==undefined||o.userData.st!==undefined))ms.push(o)});
+function pick(e){mv.set(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);rc.setFromCamera(mv,cam);const h=rc.intersectObjects(ms)[0];if(h){const u=h.object.userData;if(u.i!==undefined)openCard(u.i);else{openStage(u.st);focus(7+u.st)}}}
+$("#bV").onclick=()=>{tA=0;tE=.85;tD=d0;tX=0;tZ=22;tY=14;act=-1;renderList()};$("#bT").onclick=()=>{tE=1.45};
+$("#bL").onclick=e=>{linkOn=!linkOn;e.target.classList.toggle("on",linkOn)};
+$("#pp").onclick=e=>{playing=!playing;e.target.textContent=playing?"⏸":"▶"};
+const sl=$("#sl");sl.oninput=()=>{T=+sl.value};
+/* ---- 卡片 ---- */
+const SX={work:"上班中",go:"正在通勤上班",back:"下班回家中",home:"休息中，不在班表內"},card=$("#card");
+function openCard(i){sel=i;const j=J[i];
+ const ch=L.filter(l=>l[0]===i||l[1]===i).map(l=>{const out=l[0]===i,o=out?l[1]:l[0];return`<button data-go="${o}">${J[o][1]} ${out?"把「"+l[4]+"」送給"+J[o][0]:"從"+J[o][0]+"收到「"+l[4]+"」"}</button>`}).join("")||"<span>這份工作和大多數人都有關，正式版會補上更多連結。</span>";
+ card.innerHTML=`<button class="x" aria-label="關閉">×</button><div class="hd"><span class="em">${j[1]}</span><div><b>${j[0]}</b><span class="tag" style="background:${C[j[2]]}">${D[j[2]]}</span></div></div><p class="st" id="st"></p><p style="color:var(--mut);font-size:13px">班表：${fh(j[3])}–${fh(j[4])}（示意）</p><h4>一天在做什麼</h4><ul>${j[5].map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join("")}</ul><h4>需要的能力</h4><p>${j[6].join("、")}</p><h4>辛苦的地方</h4><p>${j[7]}</p><h4>國高中生可以怎麼接觸</h4><p>${j[8]}</p><h4>常見學習路線（示意）</h4><p>${[0,1,2].map(q=>(JP[i].includes(q)?"● ":"○ ")+SGN[q]).join("　")}</p><h4>跟誰一起運作</h4><div class="ch">${ch}</div>`;
+ hlJ.clear();hlS.clear();JP[i].forEach(q=>hlS.add(q));$("#welcome").style.display="none";focus(isl[i]);card.classList.add("open");card.scrollTop=0}
+card.onclick=e=>{if(e.target.closest(".x")){card.classList.remove("open");sel=-1;hlJ.clear();hlS.clear()}const c=e.target.closest("[data-go]");if(c)openCard(+c.dataset.go)};
+
+lbs.onclick=e=>{const t=e.target.closest("[data-i]"),q=e.target.closest("[data-k]");if(t)openCard(+t.dataset.i);else if(q){const k=+q.dataset.k;focus(k);if(k>6)openStage(k-7)}};
+/* ---- 清單與面板 ---- */
+let act=-1;const side=$("#side");
+function renderList(){$("#ilist").innerHTML=NM.map((n,q)=>(q===7?"<h4>成長之路</h4>":"")+`<button class="it${q===act?" on":""}" data-k="${q}"><i>${String(q+1).padStart(2,"0")}</i>${n}${q<7?"<small>"+G[q].length+" 個職業</small>":""}</button>`+(q===act&&q<7?`<div class="sub">${G[q].map(i=>`<button data-j="${i}">${J[i][1]} ${J[i][0]}</button>`).join("")}</div>`:"")).join("")}
+$("#ilist").onclick=e=>{const k=e.target.closest("[data-k]"),j=e.target.closest("[data-j]");if(j)openCard(+j.dataset.j);else if(k){const q=+k.dataset.k;focus(q);if(q>6)openStage(q-7)}if((j||k)&&innerWidth<900)side.classList.remove("open")};
+$("#bS").onclick=()=>side.classList.toggle("open");
+$("#bN").onclick=()=>{T=(T>=360&&T<1080)?1320:720;sl.value=T};
+$("#welcome .wx").onclick=()=>{$("#welcome").style.display="none"};
+function openStage(q){sel=-1;hlJ.clear();hlS.clear();hlS.add(q);const need=q===0?1:q;J.forEach((j,i)=>{if(JP[i].includes(need))hlJ.add(i)});$("#welcome").style.display="none";
+ const X=[["約 13–15 歲","你現在大多在這裡。先認識自己的興趣，也可以問問身邊的大人在做什麼工作。","學校的技藝教育課程與職業試探活動；畢業後可以選普通高中、高職，或五專。"],["約 16–18 歲（五專到約 20 歲）","普通高中偏向升大學；高職和專科有較多專業科目與實習，也能考證照、參加技能競賽。","選的科別會影響之後能走的職業路線。"],["約 18 歲以後","大學與研究所偏向學理與專業深化；有些職業（例如藥師、老師）需要特定科系與資格考試。","可以先看看想走的職業需要哪些科系或資格。"]][q];
+ card.innerHTML=`<button class="x" aria-label="關閉">×</button><div class="hd"><span class="em">${SGE[q]}</span><div><b>${SGN[q]}</b><span class="tag" style="background:#${SGC[q].toString(16).padStart(6,"0")}">${X[0]}</span></div></div><h4>這個階段</h4><p>${X[1]}</p><h4>可以做的事</h4><p>${X[2]}</p><h4>${q===0?"走高中職・專科後常見的職業":"這個階段常見的職業"}（示意）</h4><div class="ch">${[...hlJ].map(i=>`<button data-go="${i}">${J[i][1]} ${J[i][0]}</button>`).join("")}</div>`;card.classList.add("open");card.scrollTop=0}
+renderList();
+/* ---- 天空：星星、月亮、荷包蛋太陽 ---- */
+const sk2=$("#sky"),sx=sk2.getContext("2d"),STR=Array.from({length:110},()=>[rnd(),rnd()*.5,1+Math.floor(rnd()*2),rnd()*6.28]);
+const EGG=["..#####....",".#######.##","####ooo####","###ooooo###","###ooooo###","####ooo####",".#########.","..#######..","....###...."],MOON=["...####..","..###....",".###.....",".###.....",".###.....",".###.....","..###....","...####.."];
+function pix(bm,cx,cy,p,cols){const h=bm.length,w=bm[0].length;for(let r=0;r<h;r++)for(let c=0;c<w;c++){const ch=bm[r][c];if(ch!=="."){sx.fillStyle=cols[ch];sx.fillRect(cx+(c-w/2)*p,cy+(r-h/2)*p,p+.5,p+.5)}}}
+function halo(x,y,rgb){const g=sx.createRadialGradient(x,y,6,x,y,120);g.addColorStop(0,"rgba("+rgb+",.4)");g.addColorStop(1,"rgba("+rgb+",0)");sx.fillStyle=g;sx.fillRect(x-120,y-120,240,240)}
+function drawSky(k,now){const W=innerWidth,H=innerHeight,d=Math.min(devicePixelRatio,2);if(sk2.width!==Math.round(W*d)){sk2.width=Math.round(W*d);sk2.height=Math.round(H*d)}
+ sx.setTransform(d,0,0,d,0,0);sx.clearRect(0,0,W,H);
+ const ns=cl(1.3-2.2*k,0,1);
+ if(ns>0)STR.forEach(q=>{sx.fillStyle="rgba(255,255,255,"+ns*(.55+.45*Math.sin(now*.003+q[3]))+")";sx.fillRect(q[0]*W,q[1]*H,q[2]*2,q[2]*2)});
+ const arc=f=>[W*(.86-.72*f),H*(.24-.17*Math.sin(Math.PI*f))];
+ let f=(T-360)/720;if(f>-.05&&f<1.05){const[x,y]=arc(f);halo(x,y,"255,230,120");pix(EGG,x,y,7,{"#":"#fffdf4",o:"#ffb81c"})}
+ f=((T-1080+1440)%1440)/720;if(f<1.05){const[x,y]=arc(f);halo(x,y,"200,220,255");pix(MOON,x,y,7,{"#":"#fff7c2"})}}
+/* ---- 迴圈 ---- */
+const nC=new THREE.Color(0x0e1432),dC=new THREE.Color(0x87beeb),sk=new THREE.Color(),sN=new THREE.Color(0x0b2a5e),sD=new THREE.Color(0x1d62b0),dm=new THREE.Object3D(),on=[],v3=new THREE.Vector3();
+S.fog=new THREE.Fog(0xbfe6f7,320,900);const st=new THREE.Color(),kN=new THREE.Color(0x070b24),kD=new THREE.Color(0x4aa3e8),hN=new THREE.Color(0x1b2650),hD=new THREE.Color(0xbfe6f7);
+function lab(e,x,y,z,o){v3.set(x,y,z).project(cam);e.style.display=v3.z>1?"none":"block";e.style.transform=`translate(${(v3.x*.5+.5)*innerWidth}px,${(-v3.y*.5+.5)*innerHeight}px) translate(-50%,-100%)`;if(o!==undefined)e.classList.toggle("on",o)}
+function frame(now){
+ if(playing){T=(T+(now-last)*.015)%1440;sl.value=Math.floor(T)}last=now;
+ const k=(1+Math.cos((T/60-13)/12*Math.PI))/2,kk=.3+.7*k;
+ st.copy(kN).lerp(kD,kk);sk.copy(hN).lerp(hD,kk);S.fog.color.copy(sk);document.body.style.background="linear-gradient(#"+st.getHexString()+",#"+sk.getHexString()+")";sea.material.color.copy(sN).lerp(sD,kk);hemi.intensity=.2+.25*kk;sun.intensity=.05+.7*kk;
+ $("#clk").textContent=fmt(T)+(k>.5?" ☀️":" 🌙");
+ let w=0;
+ PP.forEach((p,n)=>{let[s,f]=ph(p.s,p.e,T);if(p.a!==undefined){const tt=(T-p.a+1440)%1440;s=tt<480?"go":"home";f=tt/480}if(n<13){on[n]=s==="work";if(on[n])w++}
+  const wk=s==="go"||s==="back";let sc=0,x=0,y=0,z=0,hd=0;
+  if(wk){const u=s==="back"?1-f:f,q=pos(p.path,u),q2=pos(p.path,cl(u+(s==="back"?-.01:.01),0,1));x=q[0];y=q[2]+Math.abs(Math.sin(now*.012+n))*.08;z=q[1];hd=Math.atan2(q2[0]-q[0],q2[1]-q[1]);sc=.85}
+  R4.compose(v3.set(x,y,z),qt.setFromAxisAngle(UY,hd),v4.set(sc,sc,sc));
+  const sw=wk?Math.sin(now*.012+n*1.7)*.7:0;
+  part(iH,n,0,1.65,0,0,0);part(iB,n,0,1.025,0,0,0);part(iL,n,-.15,.65,0,sw,.325);part(iR,n,.15,.65,0,-sw,.325);part(iA,n,-.42,1.4,0,-sw,.3);part(iA2,n,.42,1.4,0,sw,.3);
+  if(p.g){p.g.visible=wk;if(wk){p.g.position.set(x,y,z);p.g.rotation.y=hd;p.g.scale.setScalar(sc)}}});
+ [iH,iB,iL,iR,iA,iA2].forEach(m=>m.instanceMatrix.needsUpdate=true);
+ $("#cnt").textContent="上班 "+w+" 人";
+ B.forEach((b,i)=>{b.m.emissiveIntensity=(on[i]?.5:0)+(sel===i?.35:0)+(hlJ.has(i)?.35:0);b.m.color.copy(b.base).multiplyScalar(on[i]?1:.7);b.w.emissiveIntensity=on[i]?1:0;lab(LB[i],b.x,LH[i]*1.25+.8+b.y,b.z,!!on[i]);LB[i].classList.toggle("s",dist>d0*.62)});
+ IL.forEach((e,q)=>lab(e,AC[q][0],11+AC[q][2],AC[q][1]));
+ L.forEach((l,q)=>{const t2=(T-l[2]*60+1440)%1440,pc=PC[q];pc.visible=t2<90;if(pc.visible){const[x,z,y]=pos(LP[q],t2/90);pc.position.set(x,y+1.1+Math.abs(Math.sin(now*.01+q))*.3,z);pc.rotation.y=now*.003}
+  LN[q].visible=linkOn||(sel>=0&&(l[0]===sel||l[1]===sel))});
+ if(sel>=0){const p=PP[sel],st=$("#st");if(st)st.textContent=fmt(T)+"　"+SX[ph(p.s,p.e,T)[0]]}
+ SGM.forEach((m,q)=>m.emissiveIntensity=hlS.has(q)?.4+.2*Math.sin(now*.005):0);
+ CL.forEach(g=>{const u=g.userData;if(u.a)g.position.set(((now*.002*u.sp+u.off)%260)-130,g.position.y,u.fz);else g.position.set(u.fx,g.position.y,((now*.0015*u.sp+u.off)%120)-60)});
+ FB.forEach((b,n)=>{const[st,f]=ph(b.s,b.e,T),u=st==="go"?f:st==="back"?1-f:st==="work"?1:0,q=pos(b.path,u);b.g.position.set(q[0],q[2]+Math.sin(now*.003+n)*.12,q[1]);b.g.rotation.y=b.hd+(st==="back"?Math.PI:0)+(st==="work"?Math.sin(now*.002+n)*.3:0)});
+ FOAM.forEach(([f,r],n)=>{const q=r*(1.16+.06*Math.sin(now*.002+n));f.scale.set(q,1,q);f.material.opacity=.3+.12*Math.sin(now*.002+n)});
+ BT.forEach((g,n)=>{const t=((now*.004*(1+n*.2)+n*53)%160)-80;if(n===0)g.position.set(-72,0,40+t),g.rotation.y=-Math.PI/2;else if(n===1)g.position.set(72,0,40-t),g.rotation.y=Math.PI/2;else if(n===2)g.position.set(t,0,-40),g.rotation.y=0;else g.position.set(-t,0,112),g.rotation.y=Math.PI;g.position.y=Math.sin(now*.003+n)*.12});
+ az+=(tA-az)*.12;el+=(tE-el)*.12;dist+=(tD-dist)*.12;cx0+=(tX-cx0)*.1;cz0+=(tZ-cz0)*.1;cy0+=(tY-cy0)*.1;
+ cam.position.set(cx0+Math.sin(az)*Math.cos(el)*dist,cy0+Math.sin(el)*dist,cz0+Math.cos(az)*Math.cos(el)*dist);cam.lookAt(cx0,cy0,cz0);
+ drawSky(k,now);R.render(S,cam);requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
